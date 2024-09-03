@@ -1,0 +1,53 @@
+@charset "UTF-8";
+
+body {
+    text-align: center;
+}
+
+.loginTitle {
+    font-size: 80px;
+    margin-top: 240px;
+    margin-bottom: 60px;
+}
+
+.userIdLabel {
+    font-size: 20px;
+    margin-top: 60px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+
+.userIdTextbox {
+    font-size: 20px;
+    margin-top: 60px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    background-color: #FFFFFF;
+}
+
+.userPassLabel {
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+
+.userPassTextbox {
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    background-color: #FFFFFF;
+}
+
+.LoginButton {
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.loginErrorMsg {
+    font-size: 20px;
+    color: red;
+    margin-top: 20px;
+}

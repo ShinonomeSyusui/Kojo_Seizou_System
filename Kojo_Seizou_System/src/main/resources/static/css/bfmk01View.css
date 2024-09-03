@@ -1,0 +1,110 @@
+@charset "UTF-8";
+
+/* --------------------ユーザー情報登録/更新用テーブル-------------------- */
+/* ----------テーブル整形---------- */
+.user_info_table {
+    width: 1200px;
+}
+
+.table_border {
+    border: 1px #FF5050 solid;
+}
+/* ------------------------------- */
+
+/* -----検索項目名の背景色----- */
+.search_name_color {
+    background-color: #FFF0E6;
+}
+/* -------------------------- */
+
+/* -----検索項目値の背景色----- */
+.search_value_color {
+    background-color: #FFFAEB;
+}
+/* --------------------------  */
+
+/* ----------ユーザー名の注意書き---------- */
+.comments {
+    font-size: 12px;
+}
+/* -------------------------------------- */
+
+/* パスワード/パスワード再確認欄のテキストボックス */
+.pass {
+    width: 95%;
+}
+/* ------------------------------------------- */
+
+/* ----------「権限区分」チェックボックス位置調整---------- */
+.auth_div_guest, .auth_div_general, .auth_div_manager {
+    margin-right: 14px;
+}
+/* ------------------------------------------------- */
+
+/* ----------「権限」チェックボックス位置調整---------- */
+.auth_reference, .auth_operation {
+    margin-right: 30px;
+}
+/* --------------------------------------------- */
+
+/* ----------戻る/クリアボタン---------- */
+.btn_return {
+    border: 1px solid #808080;
+    background-color: #D3D3D3;
+    padding: 0px;
+    margin-left: 5px;
+    margin-right: 5px;
+    text-align: center;
+    width: 90px;
+}
+.btn_clear {
+    border: 1px solid #808080;
+    background-color: #D3D3D3;
+    padding: 0px;
+    margin-left: 0px;
+    margin-right: 5px;
+    text-align: center;
+    width: 90px;
+}
+/* ----------------------------------- */
+
+/* ----------メッセージ欄のテキストボックス---------- */
+.message {
+    padding: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    width: 800px;
+}
+/* ----------------------------------------------- */
+
+/* ---------------登録ボタン--------------- */
+.btn_entry {
+    border: 1px solid #808080;
+    background-color: #D3D3D3;
+    padding: 0px;
+    margin-top: 3px;
+    margin-left: 0px;
+    margin-right: 0px;
+    text-align: center;
+    position: absolute;
+    left: 1105px;
+    width: 90px;
+}
+/* --------------------------------------- */
+
+/* -------------------------------------------------------------------- */
+
+/* ----------登録ボタン押下時にボタンを動かす---------- */
+.user_info_btn_register:active {
+    position: relative;
+    top: 2px;
+    left: 90px;
+}
+/* -------------------------------------- */
+
+/* ----------戻る/クリアボタン押下時にボタンを動かす---------- */
+.user_info_btn:active {
+    position: relative;
+    top: 2px;
+}
+/* -------------------------------------- */

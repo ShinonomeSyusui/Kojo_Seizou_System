@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!-- common.htmlより<head>タグを読み込み -->
+<!-- <head th:insert="common :: base_header(project_title, display_name, factory, affilicate_id, user_name)">
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/bfkt02View.css}">
+</head> -->
+
+<!-- <head>タグを仮置き（「common.html」より読み込めないため） -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!-- タイトルのフォーマット -->
+    <title>B-FORME Java プロジェクト : メニュー</title>
+
+    <!--/* 必ず読み込むファイル */-->
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/common.css}" href="common.css">
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/bfkt02View.css}">
+
+</head>
+
+<body>
+    <div class="AllFlexColumn">
+        <!-- ヘッダー -->
+        <!-- <div th:replace="common :: header"></div> -->
+        <!-- ヘッダーを仮置き（「common.html」より読み込めないため） -->
+        <header class="headerTemporaryStorage">
+            B-FORME〇〇プロジェクト　メニュー　製造情報一覧 〇〇工場　製造部　美形 太郎 ログイン日時：2022/03/24 09:35:27
+            <form method="post" th:action="@{/b-forme_Kojo/pc/001}">
+                <button class="headerLogout" type="submit">ログアウト</button>
+            </form>
+        </header>
+        
+        <!-- メニュー画面 -->
+        <!-- 各「遷移後の画面」を実装する時は、<button>タグを<input>タグで囲んで画面遷移を実装して下さい -->
+        <form method ="get">
+        	<div class="MenuFlexRow">
+
+            	<!-- メニュー画面 生産管理 -->
+            	<div class="product">
+                	<h2 class="productLetter">生産管理</h2>
+                	<button type="button" class="menuBtn menuBtnProductLeft menuBtnStrong">受入確定</button>
+                	<button type="button" class="menuBtn menuBtnProductRight menuBtnStrong">受入一覧</button>
+                	<button type="button" class="menuBtn menuBtnProductLeft menuBtnWeak">製造実績</button>
+                	<button type="button" class="menuBtn menuBtnProductRight menuBtnWeak">製造予定一覧</button>
+                	<button type="button" class="menuBtn menuBtnProductLeft menuBtnStrong">作業実績</button>
+                	<button type="button" class="menuBtn menuBtnProductRight menuBtnStrong">作業予定一覧</button>
+                	<button type="button" class="menuBtn menuBtnProductLeft menuBtnWeak">不良品登録</button>
+                	<button type="button" class="menuBtn menuBtnProductRight menuBtnHidden">ボタン配置の調整用</button>
+                	<button type="button" class="menuBtn menuBtnProductLeft menuBtnStrong">入庫調整</button>
+                	<button type="button" class="menuBtn menuBtnProductRight menuBtnStrong">出庫調整</button>
+                	<button type="button" class="menuBtn menuBtnProductLeft menuBtnWeak">完成品検品</button>
+                	<button type="button" class="menuBtn menuBtnProductRight menuBtnWeak">完成品実績一覧</button>
+                	<button type="button" class="menuBtn menuBtnProductLeft menuBtnWeak">完成品移動</button>
+                	<button type="button" class="menuBtn menuBtnProductRight menuBtnStrong">出荷実績一覧</button>
+            	</div>
+
+            	<!-- メニュー画面 マスター管理 -->
+            	<div class="master">
+                	<h2 class="masterLetter">マスター管理</h2>
+                	<button type="submit" th:formaction="@{/b-forme_Kojo/pc/201}" class="menuBtn menuBtnMaster menuBtnStrong">ユーザー情報</button>
+    				<button type="submit" th:formaction="@{/b-forme_Kojo/pc/202}" class="menuBtn menuBtnMaster menuBtnStrong">ユーザー情報一覧</button>
+                	<button type="submit" th:formaction="@{/b-forme_Kojo/pc/205}" class="menuBtn menuBtnMaster menuBtnWeak">製品・部材情報</button>
+                	<button type="button" class="menuBtn menuBtnMaster menuBtnWeak">製品一覧</button>
+                	<button type="submit" th:formaction="@{/b-forme_Kojo/pc/207}" class="menuBtn menuBtnMaster menuBtnStrong">部署情報</button>
+                	<button type="button" class="menuBtn menuBtnMaster menuBtnWeak">取引先登録</button>
+                	<button type="button" class="menuBtn menuBtnMaster menuBtnWeak">取引先一覧</button>
+            	</div>
+            
+        	</div>
+        </form>
+        <!-- フッター 
+        <div th:replace="commons :: footer"></div>-->
+    </div>
+</body>
+</html>

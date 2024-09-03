@@ -1,0 +1,282 @@
+@charset "UTF-8";
+
+テーブルサイズ
+.mainTable{
+	border: solid 1px black;
+	max-width: 1200px;
+	max-height: 800px;
+}
+body{
+	background-color: #ffffff;
+}
+.mainTable, tr{
+	background-color: #FFF0E6;
+	border: solid 1px #ff5050;
+	height: auto;
+}
+tr.minitable{
+	height: 500px;
+}
+.mainTable, td{
+	background-color: #FFFAEB;
+	border:  solid 1px #ff5050;
+}
+td.ColLeft{
+	position: relative;
+	font-size: 20px;
+	width: 230px;
+	height: 50px;
+}
+td.ColRight{
+	font-size: 30px;
+	width: 970px;
+	height: 50px;
+}
+td,.upperinput{
+	width: 200px;
+	height: 35px;
+	margin-left: 5px;
+	margin-bottom: 5px;
+}
+td input.check{
+	width: 15px;
+	height: 15px;
+}
+label{
+	font-size: 20px;
+	margin-left: 10px;
+}
+button{
+	font-size: 15px;
+	width: 95px;
+	height: 45px;
+}
+input.messageColunm{
+	width: 820px;
+	height: 50px;
+}
+td.col{
+	vertical-align: baseline;
+	height: 250px;
+}
+.back{
+	margin-top: 5px;
+	margin-left: 5px;
+	width: 80px;
+	height: 40px;
+	padding: 10px 25px;
+	border: solid #4f4f4f 1px;
+	border-radius: 3px;
+    background: #e5e5e5;
+    color: black;
+    text-decoration: none;
+    text-align: center;
+    
+}
+.delete{
+	width: 75px;
+	height: 30px;
+	margin-top: 15px;
+	margin-left: 15px;
+}
+.search{
+	margin-top: 10px;
+	margin-left: 25px;
+}
+.clear{
+	margin-left: 10px;
+}
+table.secondTable{
+	overflow-x: auto;
+	height: auto;
+	margin-top: 15px;
+	margin-right: 40px;
+	margin-left: 40px;
+	max-width: 1100px;
+	
+}
+th.second{
+	background-color: #e1e1ff;
+	border: solid 3px #cecece;
+	padding: 0px;
+	height: 50px;
+	text-align: start;
+}
+th.secondth1{
+	background-color: #e1e1ff;
+	border: solid 3px #cecece;
+	padding: 0px;
+	width: 60px;
+	height: 50px;
+}
+th.secondth2{
+	background-color: #e1e1ff;
+	border: solid 3px #cecece;
+	padding: 0px;
+	width: 60px;
+	height: 50px;
+}
+th.secondth3{
+	background-color: #e1e1ff;
+	border: solid 3px #cecece;
+	padding: 0px;
+	width: 60px;
+	height: 50px;
+}
+th.secondth4{
+	background-color: #e1e1ff;
+	border: solid 3px #cecece;
+	padding: 0px;
+	width: 60px;
+	height: 50px;
+}
+th.secondth5{
+	background-color: #e1e1ff;
+	border: solid 3px #cecece;
+	padding: 0px;
+	width: 60px;
+	height: 50px;
+}
+th.secondth6{
+	background-color: #e1e1ff;
+	border: solid 3px #cecece;
+	padding: 0px;
+	width: 60px;
+	height: 50px;
+}
+th.secondth7{
+	background-color: #e1e1ff;
+	border: solid 3px #cecece;
+	padding: 0px;
+	width: 60px;
+	height: 50px;
+}
+th.secondth8{
+	background-color: #e1e1ff;
+	border: solid 3px #cecece;
+	padding: 0px;
+	width: 60px;
+	height: 50px;
+}
+th.secondth9{
+	background-color: #e1e1ff;
+	border: solid 3px #cecece;
+	padding: 0px;
+	width: 60px;
+	height: 50px;
+}
+th.secondth10{
+	background-color: #e1e1ff;
+	border: solid 3px #cecece;
+	padding: 0px;
+	width: 60px;
+	height: 50px;
+}
+
+.box.inner{
+	display: flex;
+}
+.inner dl{
+	width: auto;
+}
+
+td.second{
+	background-color: #f5f5ff;
+	border-top: solid 2px #cecece;
+	border-bottom: solid 2px #cecece;
+	height: 50px;
+}
+td.second2{
+	background-color: #ffffff;
+	border-top: solid 2px #cecece;
+	border-bottom: solid 2px #cecece;
+	height: 50px;
+}
+.pagination {
+    list-style: none;
+}
+
+.pagination li {
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: #2C7CFF;
+    border-radius: 3px;
+    display: inline-block;
+    margin: 0 0.5em;
+    cursor: pointer;
+}
+
+.pagination .count {
+    font-weight: normal;
+    color: #000000;
+    background-color: #FFFFFF;
+}
+
+#pagination_content{
+    text-align: center;
+}
+
+.box{
+	overflow-x: scroll;
+	margin-bottom: 25px;
+	margin-left: 25px;
+	width: 1170px;
+}
+.flex-row1{
+	background-color: #e1e1ff ;
+	display: flex;
+	gap: 1px;
+	height: 40px;
+	border: solid 2px #cecece;
+	text-align: center;
+	align-items: center;
+}
+.flex-row2{
+	background-color: #f5f5ff;
+	display: flex;
+	gap: 1px;
+	border-right:solid 2px #cecece ;
+	border-bottom: solid 2px #cecece;
+	border-left: solid 2px #cecece;
+	text-align: center;
+	align-items: center;
+	height: 40px;
+}
+.flex-row3{
+	background-color: #ffffff ;
+	display: flex;
+	gap: 1px;
+	height: 40px;
+	border-right:solid 2px #cecece ;
+	border-bottom: solid 2px #cecece;
+	border-left: solid 2px #cecece;
+	text-align: center;
+	align-items: center;
+}
+.col1{
+	width: 50px;
+}
+.col2{
+	width: 80px;
+}
+.col3{
+	width: 170px;
+}
+.col4,.col6,.col7,.col8{
+	width: 120px;
+}
+.col5{
+	width: 190px;
+}
+.col9{
+	width: 160px;
+}
+.col10{
+	width: 160px;
+}
+.col11{
+	width: 160px;
+}
+.colhead{
+	border-right: solid 2px #cecece;
+}

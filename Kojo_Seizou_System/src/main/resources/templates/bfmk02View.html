@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:text="#{pageTitle}"></title>
+<!--<link rel="stylesheet" href="../static/css/bfmk02View.css">-->
+<link rel="stylesheet" th:href="@{/css/bfmk02View.css}">
+</head>
+<body>
+	<container>
+		<form method="post" th:action="@{/pc/202}" th:object="${searchForm}">
+			<table class="mainTable">
+				<tbody>
+					<tr>
+						<td class="ColLeft" th:text="#{affilicateId}"></td>
+						<td class="ColRight">
+							<input class="upperinput" type="text" name="affilicateId" th:value="${affilicateId}"/>
+						</td>
+					</tr>
+					<tr>
+						<td class="ColLeft" th:text="#{userId}"></td>
+						<td class="ColRight">
+							<input class="upperinput" type="text" name="userId" th:field="*{userId}"/>
+						</td>
+					</tr>
+					<tr>
+						<td class="ColLeft" th:text="#{userName}"></td>
+						<td class="ColRight">
+							<input class="upperinput" type="text" th:field="*{userName}"/>
+						</td>
+					</tr>
+					<tr>
+						<td class="ColLeft" th:text="#{authDiv}"></td>
+						<td class="ColRight">
+							<input class="check" type="checkbox" value="1" th:field="*{authDiv}"/><label th:text="#{gst}"></label>
+							<input class="check" type="checkbox" value="2" th:field="*{authDiv}"/><label th:text="#{general}"></label>
+							<input class="check" type="checkbox" value="3" th:field="*{authDiv}"/><label th:text="#{administrator}"></label>
+						</td>
+					</tr>
+					<tr>
+						<td class="ColLeft" th:text="#{effectiveDate}"></td>
+						<td class="ColRight"><input class="upperinput" type="text" th:field="*{expireDateFrom}"/>
+							<label>～  </label><input class="upperinput" type="text" th:field="*{expireDateTo}"/></td>
+					</tr>
+					<tr>
+						<td colspan="2" class="col">
+							<div class="buttons">
+								<a class="back" type="submit" name="back" 
+									href="/b-forme_Kojo/pc/002" th:text="#{return}"></a>
+								<!--<div class="messageColunm" th:text="${errorMeg}" th:if="errorMeg"></div>-->
+								<input class="messageColunm" type="text" readonly />
+								<button class="search" type="submit" name="search" 
+									formaction="/b-forme_Kojo/pc/202" th:text="#{search}"></button>
+								<button class="clear" type="submit" name="clear" 
+									formaction="/b-forme_Kojo/pc/202" th:text="#{clear}"></button>
+							</div>
+							<div>
+								<button class="delete" type="submit" name="delete" 
+									formaction="/b-forme_Kojo/pc/202" th:text="#{delete}"></button>
+							</div>
+							<div id="pagination_content" th:if="${users}">
+								<ul class="pagination">
+									<li id="first">&nbsp;<<&nbsp; </li>
+									<li id="prev">&nbsp;<&nbsp; </li>
+									<li class="count"></li>
+									<li id="next">&nbsp;>&nbsp;</li>
+									<li id="last">&nbsp;>>&nbsp;</li>
+								</ul>
+							</div>
+							<div class="box" th:if="${users}">
+								<div class="flex-row1">
+									<span class="col1 colhead"></span>
+									<span class="col2 colhead" th:text="#{affilicateId}"></span>
+									<span class="col3 colhead" th:text="#{affilicateName}"></span>
+									<span class="col4 colhead" th:text="#{userId}"></span>
+									<span class="col5 colhead" th:text="#{userName}"></span>
+									<span class="col6 colhead" th:text="#{authDiv}"></span>
+									<span class="col7 colhead" th:text="#{watchAuth}"></span>
+									<span class="col8 colhead" th:text="#{oprAuth}"></span>
+									<span class="col9 colhead" th:text="#{effDateFrom}"></span>
+									<span class="col10 colhead" th:text="#{effDateTo}"></span>
+									<span class="col11 colhead" th:text="#{pass}"></span>
+								</div>
+								<div class="flex-row2" th:each="user:${users}">
+									<span class="col1"><input type="checkbox" name="userId" th:value="${user.userId}" /></span>
+									<span class="col2" th:text="${user.affilicateId}"></span>
+									<span class="col3" th:text="${user.affilicateName}"></span>
+									<span class="col4"><a href="#" th:text="${user.userId}"></a></span>
+									<span class="col5" th:text="${user.userName}"></span>
+									<span class="col6" th:text="${user.authDiv}"></span>
+									<span class="col7" th:text="${user.watchAuthFlg}"></span>
+									<span class="col8" th:text="${user.oprAuthFlg}"></span>
+									<span class="col9" th:text="${user.expireDateFrom}"></span>
+									<span class="col10" th:text="${user.expireDateTo}"></span>
+									<span class="col11" th:text="${user.pass}"></span>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+	</container>
+</body>
+</html>

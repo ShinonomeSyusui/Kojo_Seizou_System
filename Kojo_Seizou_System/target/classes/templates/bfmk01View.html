@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!-- commons.htmlより<head>タグを読み込み -->
+<!-- 読み込むとこのHTML用の「bfmk01View.css」が読み込めないので、<head>タグを仮置き中 -->
+<!-- <head th:replace="commons :: base_header"> -->
+    <!-- <div th:include="commons :: base_header"></div> -->
+    <!-- <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/bfmk01View.css}"> -->
+<!-- </head> -->
+
+<!-- 仮置きの<head>タグ -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- タイトルのフォーマット -->
+    <title>B-FORME Java プロジェクト : ユーザー情報</title>
+    <!--/* 必ず読み込むファイル */-->
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/common.css}" href="common.css">
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/bfmk01View.css}">
+</head>
+
+<body>
+    <!-- ヘッダー部の読み込み -->
+    <!-- <div th:replace="commons :: header"></div> -->
+    <!-- ヘッダーを仮置き -->
+    <header class="headerTemporaryStorage">
+        B-FORME〇〇プロジェクト　メニュー　製造情報一覧 〇〇工場　製造部　美形 太郎 ログイン日時：2022/03/24 09:35:27
+        <form method="post" th:action="@{/b-forme_Kojo/pc/001}">
+            <button class="headerLogout" type="submit" style="color: red; font-weight: bold; border: 2px solid;">ログアウト</button>
+        </form>
+    </header>
+
+    <!-- ユーザー情報の登録 or 更新画面 -->
+    <form method ="post" th:action ="@{/b-forme_Kojo/pc/201}" name="user_info_form" th:object="${bfmk01Form}">
+
+        <table class="user_info_table">
+            
+            <tr>
+                <td width="200px" class="table_border search_name_color">所属ID*</td>
+                <td colspan="3" class="table_border search_value_color"><input type="text" th:field="*{affilicateId}" th:readonly="${affilicateIdOrUserIdTextboxFlg}"></td>
+            </tr>
+            <tr>
+                <td width="200px" class="table_border search_name_color">ユーザーID</td>
+                <td colspan="3" class="table_border search_value_color"><input type="text" th:field="*{userId}" th:readonly="${updateTextBoxFlg || affilicateIdOrUserIdTextboxFlg}"></td>
+            </tr>
+            <tr>
+                <td width="200px" class="table_border search_name_color">ユーザー名*</td>
+                <td colspan="3" class="table_border search_value_color">
+                    <input type="text" th:field="*{userName}" th:readonly="${updateTextBoxFlg}">
+                    <span class="comments">※苗字、名前は半角スペースを空けること</span>
+                </td>
+            </tr>
+            <tr>
+                <td width="200px" class="table_border search_name_color">パスワード*</td>
+                <td width="400px" class="table_border search_value_color"><input type="text" class="pass" th:field="*{pass}"></td>
+                <td width="200px" class="table_border search_name_color">パスワード再確認*</td>
+                <td width="400px" class="table_border search_value_color"><input type="text" class="pass" th:field="*{rePass}"></td>
+            </tr>
+            <tr>
+                <td width="200px" class="table_border search_name_color">権限区分*</td>
+                <td colspan="3" class="table_border search_value_color">
+                    <input type="checkbox" id="auth_div_guest"   name="auth_div" th:value="1" th:field=*{authDiv} th:if="*{authDiv == '1'}" checked>
+                    <input type="checkbox" id="auth_div_guest"   name="auth_div" th:value="1" th:field=*{authDiv} th:if="*{authDiv != '1'}">
+                    <label for="auth_div_guest"   class="auth_div_guest">ゲスト</label>
+                    <input type="checkbox" id="auth_div_general" name="auth_div" th:value="2" th:field=*{authDiv} th:if="*{authDiv == '2'}" checked>
+                    <input type="checkbox" id="auth_div_general" name="auth_div" th:value="2" th:field=*{authDiv} th:if="*{authDiv != '2'}">
+                    <label for="auth_div_general" class="auth_div_general">一般</label>
+                    <input type="checkbox" id="auth_div_manager" name="auth_div" th:value="3" th:field=*{authDiv} th:if="*{authDiv == '3' || authDiv == '4'}" checked>
+                    <input type="checkbox" id="auth_div_manager" name="auth_div" th:value="3" th:field=*{authDiv} th:if="*{authDiv != '3' && authDiv != '4'}">
+                    <label for="auth_div_manager" class="auth_div_manager">管理者</label>
+                </td>
+            </tr>
+            <tr>
+                <td width="200px" class="table_border search_name_color">権限*</td>
+                <td colspan="3" class="table_border search_value_color">
+                    <input type="checkbox" id="auth_reference" name="auth" th:field="*{watchAuthFlg}" th:checked="*{watchAuthFlg}" th:readonly="true">
+                    <label for="auth_reference" class="auth_reference">参照</label>
+                    <input type="checkbox" id="auth_operation" name="auth" th:field="*{oprAuthFlg}" th:checked="*{oprAuthFlg}" th:readonly="true">
+                    <label for="auth_operation" class="auth_operation">操作</label>
+                </td>
+            </tr>
+            <tr>
+                <td width="200px" class="table_border search_name_color">有効日*</td>
+                <td colspan="3" class="table_border search_value_color">
+                    <input type="text" th:field="*{expireDateFrom}" th:readonly="${updateTextBoxFlg}">
+                        ～
+                    <input type="text" th:field="*{expireDateTo}">
+                </td>
+            </tr>
+        </table>
+
+        <button type="submit" name="back" class="btn_return user_info_btn">戻る</button>
+        <button type="submit" name="clear" class="btn_clear user_info_btn" th:if="${clearBtnOpeFlg == true}">クリア</button>
+        <button type="submit" name="clear" class="btn_clear user_info_btn" th:if="${clearBtnOpeFlg == false}" disabled>クリア</button>
+        
+        <!-- 「メッセージ」欄 -->
+        <input type="text" class="message" th:value="${message}">
+        
+        <button type="submit" name="register" class="btn_entry user_info_btn_register" th:if="${registerBtnOpeFlg == true && registerOrUpdateBtnFlg == true}">登録</button>
+        <button type="submit" name="update"   class="btn_entry user_info_btn_register" th:if="${registerBtnOpeFlg == true && registerOrUpdateBtnFlg == false}">更新</button>
+        <button type="submit" name="register" class="btn_entry user_info_btn_register" th:if="${registerBtnOpeFlg == false}" disabled>登録</button>
+
+    </form>
+
+    <!-- JQueryの読み込み -->
+    <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
+    <!-- JavaScriptの読み込み -->
+    <!-- <script th:src=@{/js/common.js} type="text/javascript"></script> -->
+    <!--/* 必ず読み込むファイル */-->
+    <script type="text/javascript" th:src="@{/js/bfmk01View.js}"></script>
+</body>
+</html>

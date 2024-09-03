@@ -1,0 +1,133 @@
+@charset "UTF-8";
+
+/* 仮置きしてるヘッダー用（正規のヘッダーを実装次第、削除予定） */
+.headerTemporaryStorage {
+    font-size: 18px;
+}
+
+/* 仮置きしてるヘッダー用 / ログアウト（正規のヘッダーを実装次第、削除予定） */
+.headerLogout {
+    font-size: 15px;
+    font-weight: bolder;
+    text-align: center;
+    color: red;
+    width: 100px;
+    height: 30px;
+    margin-left: 30px;
+    padding: 1px;
+    border: solid 3px;
+    border-color: red;
+}
+
+/* 仮置きしてるヘッダー用 / ログアウト / マウスオーバー時（正規のヘッダーを実装次第、削除予定） */
+.headerLogout:hover {
+    font-size: 15px;
+    font-weight: bolder;
+    text-align: center;
+    color: white;
+    background-color: red;
+    width: 100px;
+    height: 30px;
+    margin-left: 30px;
+    padding: 1px;
+    border: solid 1px;
+    border-color: red;
+}
+
+/* メニュー画面（ヘッダー/フッター込み）のレイアウト骨組み */
+.AllFlexColumn {
+    display: flex;
+    flex-direction: column;
+    height: 800px;
+}
+
+/* メニュー画面（ヘッダー/フッター除く）のレイアウト骨組み */
+.MenuFlexRow {
+    display: flex;
+    flex-direction: row;
+    width: 1200px;
+    justify-content: center;
+}
+
+/* 生産管理メニュー */
+.product {
+    background-color: #dee6ef;
+    width: 600px;
+    height: 740px;
+    margin: 0 50px 0 100px;
+    padding: 10px;
+    border: solid 5px;
+    border-color: #2f528f;
+    border-radius: 50px;
+}
+
+/* 「生産管理」 文字位置の調整 */
+.productLetter {
+    text-align: center;
+}
+
+/* マスター管理メニュー */
+.master {
+    background-color: #dee6ef;
+    width: 300px;
+    height: 740px;
+    margin: 0 100px 0 50px;
+    padding: 10px;
+    border: solid 5px;
+    border-color: #2f528f;
+    border-radius: 50px;
+}
+
+/* 「マスター管理」 文字位置の調整 */
+.masterLetter {
+    text-align: center;
+}
+
+/* メニューボタン（共通） */
+.menuBtn {
+    font-size: 20px;
+    text-align: center;
+    width: 200px;
+    height: 80px;
+    padding: 10px;
+    border: solid 1px;
+    border-radius: 10px;
+    box-shadow: 0px 5px #bfbfbf;
+}
+
+/* メニューボタン押下時に動かす */
+.menuBtn:active {
+    box-shadow: none;
+    position: relative;
+    top: 5px;
+}
+
+/* メニューボタン（左側） マージン（生産管理） */
+.menuBtnProductLeft {
+    margin: 5px 25px 5px 40px;
+}
+
+/* メニューボタン（右側） マージン（生産管理） */
+.menuBtnProductRight {
+    margin: 5px 40px 5px 25px;
+}
+
+/* ボタン配置の調整用メニューボタン  */
+.menuBtnHidden {
+    visibility: hidden;
+}
+
+/* メニューボタン マージン（マスター管理） */
+.menuBtnMaster {
+    margin: 5px 50px 5px 50px;
+}
+
+/* メニューボタン 背景色 濃 */
+.menuBtnStrong {
+    background-color: #729fcf;
+}
+
+/* メニューボタン 背景色 薄 */
+.menuBtnWeak {
+    background-color: #b4c7dc;
+}

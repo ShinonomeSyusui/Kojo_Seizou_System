@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!-- タイトルのフォーマット -->
+    <title>B-FORME Java プロジェクト : ログイン</title>
+
+    <!--/* 必ず読み込むファイル */-->
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/common.css}" href="common.css">
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/bfkt01View.css}">
+
+</head>
+
+<body>
+    <h2 class="loginTitle">B-FORME○○製作プロジェクト</h2>
+
+    <form th:action="@{/b-forme_Kojo/pc/002}" method="post" id="loginForm">
+        <label class="userIdLabel" for="userId">ユーザーID</label>
+        <input class="userIdTextbox" type="text" name="userId" id="userId"><br>
+        <label class="userPassLabel" for="userPass">パスワード</label>
+        <input class="userPassTextbox" type="text" name="userPass" id="userPass"><br>
+        <input class="LoginButton" type="submit" id="loginBtn" value="ログイン">
+    </form>
+
+    <!-- ログイン失敗時のエラーメッセージ -->
+    <p class="loginErrorMsg" th:if="${session['SPRING_SECURITY_LAST_EXCEPTION']} != null" th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}">
+        ログインエラーメッセージ
+    </p>
+
+    <!-- フッター -->
+    <!-- <div th:replace="commons :: footer"></div> -->
+
+    <!--/* 必ず読み込むファイル */-->
+    <script type="text/javascript" th:src="@{/js/bfkt01View.js}"></script>
+</body>
+</html>
