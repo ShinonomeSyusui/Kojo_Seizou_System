@@ -1,7 +1,9 @@
 package com.seizou.kojo.domain.service;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -45,7 +47,7 @@ public class Bfmk02Service {
 	/**
 	 * 検索
 	 * @param form
-	 * @return List<UserInfoDto>
+	 * @return returnDtoList
 	 */
 	public List<UserInfoDto> getAllUserInfo(SearchForm form){
 
@@ -61,7 +63,7 @@ public class Bfmk02Service {
 			
 			returnDto.setFacCd("bfm1");											// 工場CD
 			returnDto.setAffilicateId((String)map.get("affilicate_id"));		// 所属ID
-			returnDto.setAffilicateName((String)map.get("affilicate_name_r"));	// 所属名
+			returnDto.setAffilicateName((String)map.get("affilicate_name"));	// 所属名
 			returnDto.setUserId((String)map.get("user_id"));					// ユーザーID
 			returnDto.setUserName((String)map.get("user_name"));				// ユーザー名
 			returnDto.setCount((Integer)map.get("count"));						// 所属人数
@@ -87,13 +89,13 @@ public class Bfmk02Service {
 	}
 	
 	/**
-	 * クリアボタンが押された時の処理
+	 * クリア
 	 * @param form
 	 * @return
 	 */
 	public SearchForm clearForm(SearchForm form) {
 		
-		//各項目の初期化
+		// 各項目の初期化
 		form.setAffilicateId("");
 		form.setUserId("");
 		form.setUserName("");
@@ -104,14 +106,14 @@ public class Bfmk02Service {
 	}
 	
 	/**
-	 * 削除ボタンが押下された時の処理
+	 * 削除
 	 * @param commonDtoo
 	 * @param id
 	 * @return
 	 */
 	public String deleteUser(CommonDto commonDto, List<String> id) {
 		
-		//入力チェック
+		// 入力チェック
 		if (id != null) {
 			
 			//削除処理
@@ -120,5 +122,31 @@ public class Bfmk02Service {
 			}
 		}
 		return "";
+	}
+	
+	/**
+	 * 入力チェック、日付け型変換
+	 * @param form
+	 * @return 日付け形式と空文字の時にtrue
+	 */
+	public boolean dateFormat(String date) {
+		
+		// 空文字チェック
+		if (date.isBlank() || date.isEmpty()) {
+			return true;
+		}
+		
+		//受け取り側のフォーマット指定
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		
+		// 有効日の表示型をフォーマット
+		try {
+			Date d = format.parse(date);
+			System.out.println(d);
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 }

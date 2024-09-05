@@ -15,6 +15,7 @@ import com.seizou.kojo.domain.form.SearchForm;
 
 @Repository
 public class Bfmk02Repository {
+
 	
 	@Autowired
 	JdbcTemplate jdbcTemplate;
@@ -88,13 +89,13 @@ public class Bfmk02Repository {
 	/**
 	 * 条件検索
 	 * @param form
-	 * @return　namedJdbc.queryForList(sql,joken);
+	 * @return namedJdbc.queryForList(sql,joken);
 	 */
 	public List<Map<String, Object>> searchInfo(SearchForm form) {
 		
 		String sql = "SELECT "
 				+ "u.affilicate_id "						//所属ID
-				+ ",b.affilicate_name_r "						//所属名
+				+ ",b.affilicate_name "						//所属名
 				+ ",u.user_id "								//ユーザーID
 				+ ",u.user_name "							//ユーザー名
 				+ ",u.expire_date_from "					//有効日(From)
@@ -128,48 +129,48 @@ public class Bfmk02Repository {
 
 		Map<String, Object> joken = new HashMap<String, Object>();
 
-		//所属ID
+		// 所属ID
 		if(!(form.getAffilicateId().isBlank() || form.getAffilicateId().isEmpty())) {
 			sql += "AND u.affilicate_id = :affilicateId ";
 			joken.put("affilicateId", form.getAffilicateId());
 		}
 
-		//ユーザーID
+		// ユーザーID
 		if(!(form.getUserId().isBlank() || form.getUserId().isEmpty())) {
 			sql += "AND u.user_id = :userId ";
 			joken.put("userId", form.getUserId());
 		}
 
-		//ユーザー名
+		// ユーザー名
 		if(!(form.getUserName().isBlank() || form.getUserName().isEmpty())) {
 			sql += "AND u.user_name LIKE :userName ";
 			joken.put("userName", "%" + form.getUserName() + "%");
 		}
 
-		//権限区分
+		// 権限区分
 		if (!(form.getAuthDiv().size() == 0 || form.getAuthDiv().size() == 3)) {
 			sql += "AND u.auth_div IN (:authDiv) ";
 			joken.put("authDiv", form.getAuthDiv());
 		}
-		
-		//有効日(From)
+
+		// 有効日(From)
 		if (!(form.getExpireDateFrom().isBlank() || form.getExpireDateFrom().isEmpty())) {
 			sql += "AND u.expire_date_from = :expireDateFrom ";
 			joken.put("expireDateFrom", form.getExpireDateFrom());
 		}
-		
-		//有効日(To)
+
+		// 有効日(To)
 		if (!(form.getExpireDateTo().isBlank() || form.getExpireDateTo().isEmpty())) {
 			sql += "AND u.expire_date_to = :expireDateTo ";
 			joken.put("expireDateTo", form.getExpireDateTo());
 		}
-		
+
 		sql += "ORDER BY u.affilicate_id ,u.user_id ";
-		
+
 		return namedJdbc.queryForList(sql,joken);
 	}
-	
-	//削除
+
+	// 削除
 	public int delete(String userId) {
 		String sql = "UPDATE "
 				+ "user_info "

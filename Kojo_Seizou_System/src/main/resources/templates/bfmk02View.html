@@ -49,9 +49,9 @@
 								<!--<div class="messageColunm" th:text="${errorMeg}" th:if="errorMeg"></div>-->
 								<input class="messageColunm" type="text" readonly />
 								<button class="search" type="submit" name="search" 
-									formaction="/b-forme_Kojo/pc/202" th:text="#{search}"></button>
+									formaction="/b-forme_Kojo/pc/202" th:text="#{search}" th:disabled="${disabled}"></button>
 								<button class="clear" type="submit" name="clear" 
-									formaction="/b-forme_Kojo/pc/202" th:text="#{clear}"></button>
+									formaction="/b-forme_Kojo/pc/202" th:text="#{clear}" th:disabled="${disabled}"></button>
 							</div>
 							<div>
 								<button class="delete" type="submit" name="delete" 
