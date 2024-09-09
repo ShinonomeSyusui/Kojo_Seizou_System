@@ -8,27 +8,27 @@
 <body>
 	<container>
 		<form method="post" th:action="@{/pc/202}" th:object="${searchForm}">
-			<table class="mainTable">
+			<table id="mainTable">
 				<tbody>
-					<tr>
+					<tr id="row1">
 						<td class="ColLeft" th:text="#{affilicateId}"></td>
 						<td class="ColRight">
-							<input class="upperinput" type="text" name="affilicateId" th:value="${affilicateId}"/>
+							<input class="upperinput" type="text" name="affilicateId" th:field="*{affilicateId}" th:readonly="*{affilicateId}"/>
 						</td>
 					</tr>
-					<tr>
+					<tr id="row2">
 						<td class="ColLeft" th:text="#{userId}"></td>
 						<td class="ColRight">
 							<input class="upperinput" type="text" name="userId" th:field="*{userId}"/>
 						</td>
 					</tr>
-					<tr>
+					<tr id="row3">
 						<td class="ColLeft" th:text="#{userName}"></td>
 						<td class="ColRight">
 							<input class="upperinput" type="text" th:field="*{userName}"/>
 						</td>
 					</tr>
-					<tr>
+					<tr id="row4">
 						<td class="ColLeft" th:text="#{authDiv}"></td>
 						<td class="ColRight">
 							<input class="check" type="checkbox" value="1" th:field="*{authDiv}"/><label th:text="#{gst}"></label>
@@ -36,22 +36,22 @@
 							<input class="check" type="checkbox" value="3" th:field="*{authDiv}"/><label th:text="#{administrator}"></label>
 						</td>
 					</tr>
-					<tr>
+					<tr id="row5">
 						<td class="ColLeft" th:text="#{effectiveDate}"></td>
 						<td class="ColRight"><input class="upperinput" type="text" th:field="*{expireDateFrom}"/>
 							<label>～  </label><input class="upperinput" type="text" th:field="*{expireDateTo}"/></td>
 					</tr>
-					<tr>
+					<tr id="row6">
 						<td colspan="2" class="col">
 							<div class="buttons">
 								<a class="back" type="submit" name="back" 
 									href="/b-forme_Kojo/pc/002" th:text="#{return}"></a>
 								<!--<div class="messageColunm" th:text="${errorMeg}" th:if="errorMeg"></div>-->
-								<input class="messageColunm" type="text" readonly />
-								<button class="search" type="submit" name="search" 
-									formaction="/b-forme_Kojo/pc/202" th:text="#{search}"></button>
+								<p class="messageColunm" type="text" readonly th:if="${msinfo001}" th:text="${msinfo001}"></p>
+								<button class="search" type="submit" name="search"  
+									formaction="/b-forme_Kojo/pc/202" th:text="#{search}" th:disabled="${disabled}"></button>
 								<button class="clear" type="submit" name="clear" 
-									formaction="/b-forme_Kojo/pc/202" th:text="#{clear}"></button>
+									formaction="/b-forme_Kojo/pc/202" th:text="#{clear}" th:disabled="${disabled}"></button>
 							</div>
 							<div>
 								<button class="delete" type="submit" name="delete" 
@@ -67,6 +67,38 @@
 								</ul>
 							</div>
 							<div class="box" th:if="${users}">
+								<table id="subTable">
+									<tbody>
+										<tr>
+											<th id="colhead"></th>
+											<th id="colhead" th:text="#{affilicateId}"></th>
+											<th id="colhead" th:text="#{affilicateName}"></th>
+											<th id="colhead" th:text="#{userId}"></th>
+											<th id="colhead" th:text="#{userName}"></th>
+											<th id="colhead" th:text="#{authDiv}"></th>
+											<th id="colhead" th:text="#{watchAuth}"></th>
+											<th id="colhead" th:text="#{oprAuth}"></th>
+											<th id="colhead" th:text="#{effDateFrom}"></th>
+											<th id="colhead" th:text="#{effDateTo}"></th>
+											<th id="colhead" th:text="#{pass}"></th> 
+										</tr>
+										<tr th:each="user:${users}">
+											<td id="col1"><input type="checkbox" name="userId" th:value="${user.userId}" /></td>
+											<td id="col2" th:text="${user.affilicateId}"></td>
+											<td id="col3" th:text="${user.affilicateName}"></td>
+											<td id="col4"><a href="#" th:text="${user.userId}"></a></td>
+											<td id="col5" th:text="${user.userName}"></td>
+											<td id="col6" th:text="${user.authDiv}"></td>
+											<td id="col7" th:text="${user.watchAuthFlg}"></td>
+											<td id="col8" th:text="${user.oprAuthFlg}"></td>
+											<td id="col9" th:text="${user.expireDateFrom}"></td>
+											<td id="col10" th:text="${user.expireDateTo}"></td>
+											<td id="col11" th:text="${user.pass}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!--<div class="box" th:if="${users}">
 								<div class="flex-row1">
 									<span class="col1 colhead"></span>
 									<span class="col2 colhead" th:text="#{affilicateId}"></span>
@@ -93,7 +125,7 @@
 									<span class="col10" th:text="${user.expireDateTo}"></span>
 									<span class="col11" th:text="${user.pass}"></span>
 								</div>
-							</div>
+							</div>-->
 						</td>
 					</tr>
 				</tbody>

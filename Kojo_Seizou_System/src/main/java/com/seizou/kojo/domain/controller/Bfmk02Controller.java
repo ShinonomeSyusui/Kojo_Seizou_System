@@ -45,10 +45,12 @@ public class Bfmk02Controller {
 	public String init(CommonDto commonDto, @ModelAttribute SearchForm form, Model model) {
 
 		//メニュー画面の実装がないので仮に設定
-		commonDto = new CommonDto("bfmk02", "ユーザーの情報一覧", "bfkt02", null, "bfm1", "us1", "総務部", "uskr000", "boss");
+		commonDto = new CommonDto("bfmk02", "ユーザーの情報一覧", "bfkt02", null, "bfm1", "us1", "総務部", "uskr000", "boss");  //権限区分:3(管理者)
+		//commonDto = new CommonDto("bfmk02", "ユーザーの情報一覧", "bfkt02", null, "bfm1", "it1", "IT部", "itns004", "春夏 秋冬"); //権限区分:2(一般)
 
 		//権限区分検索
 		String authDiv = service.checkAuth(commonDto);
+		System.out.println(authDiv);
 
 		//権限チェック
 		if ("1".equals(authDiv) || "2".equals(authDiv)) {
@@ -63,8 +65,9 @@ public class Bfmk02Controller {
 
 			// 戻り値をModelに格納する
 			form.setAffilicateId(authDiv);
+			
 			//所属IDの入力項目を非活性にする
-
+			form.setAffilicateId(commonDto.getAffId());
 		}
 		return "bfmk02View";
 	}

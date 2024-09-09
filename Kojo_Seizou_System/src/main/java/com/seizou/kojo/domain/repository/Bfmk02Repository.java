@@ -71,15 +71,15 @@ public class Bfmk02Repository {
 	public String getAuthDiv(CommonDto commonDto) {
 
 		String sql = "SELECT "
-				+ "ui.auth_div "
+				+ "ui.auth_div "			//権限区分
 				+ "FROM "
 				+ "user_info AS ui "
 				+ "WHERE "
-				+ "ui.fac_cd = ? "
+				+ "ui.fac_cd = ? "			//工場CD
 				+ "AND "
-				+ "ui.affilicate_id = ? "
+				+ "ui.affilicate_id = ? "	//部署ID
 				+ "AND "
-				+ "ui.user_id = ? ";
+				+ "ui.user_id = ? ";		//ユーザーID
 		Map<String, Object> authDiv = jdbcTemplate.queryForMap(sql, commonDto.getFacCd(), commonDto.getAffId(), commonDto.getUserId());
 
 		String returnValue = (String)authDiv.get("auth_div");
@@ -175,9 +175,9 @@ public class Bfmk02Repository {
 		String sql = "UPDATE "
 				+ "user_info "
 				+ "SET "
-				+ "del_flg = '1' "
+				+ "del_flg = '1' "		//削除フラグ
 				+ "WHERE "
-				+ "user_id = ?";
+				+ "user_id = ?";		//ユーザーID
 		return jdbcTemplate.update(sql,userId);
 	}
 }
