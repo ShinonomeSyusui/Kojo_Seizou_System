@@ -1,5 +1,7 @@
 package com.seizou.kojo.domain.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -45,8 +47,9 @@ public class Bfmk02Controller {
 	public String init(CommonDto commonDto, @ModelAttribute SearchForm form, Model model) {
 
 		//メニュー画面の実装がないので仮に設定
-		commonDto = new CommonDto("bfmk02", "ユーザーの情報一覧", "bfkt02", null, "bfm1", "us1", "総務部", "uskr000", "boss");  //権限区分:3(管理者)
+		//commonDto = new CommonDto("bfmk02", "ユーザーの情報一覧", "bfkt02", null, "bfm1", "us1", "総務部", "uskr000", "boss");  //権限区分:3(管理者)
 		//commonDto = new CommonDto("bfmk02", "ユーザーの情報一覧", "bfkt02", null, "bfm1", "it1", "IT部", "itns004", "春夏 秋冬"); //権限区分:2(一般)
+		commonDto = new CommonDto("bfmk02", "ユーザーの情報一覧", "bfkt02", null, "bfm1", "all", "*****", "al00000", "admin");  //権限区分:4(アドミン)
 
 		//権限区分検索
 		String authDiv = service.checkAuth(commonDto);
@@ -65,10 +68,20 @@ public class Bfmk02Controller {
 
 			// 戻り値をModelに格納する
 			form.setAffilicateId(authDiv);
-			
+
 			//所属IDの入力項目を非活性にする
 			form.setAffilicateId(commonDto.getAffId());
 		}
+
+		//今日の日付けをフォームへセット
+		String kyou = "";
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date today = new Date();
+		kyou = format.format(today);
+
+		//Formに今日の日付けをセット
+		form.setExpireDateFrom(kyou);
+
 		return "bfmk02View";
 	}
 
@@ -80,16 +93,26 @@ public class Bfmk02Controller {
 	 */
 	@PostMapping(path = "/pc/202",params = "search")
 	public String search(@ModelAttribute SearchForm form, Model model) {
-		
+
 		//日付け入力値のチェックと検索処理
 		if (service.dateFormat(form.getExpireDateFrom()) && service.dateFormat(form.getExpireDateTo())) {
-			List<UserInfoDto> userList = service.getAllUserInfo(form);
-			model.addAttribute("users",userList);
+			
+			//不正な入力値の処理
+			model.addAttribute("msinfo002",source.getMessage("msinfo002", null, Locale.JAPAN));
 			return "bfmk02View";
 		}
 		
-		//不正な入力値の処理
-		model.addAttribute("msinfo002",source.getMessage("msinfo002", null, Locale.JAPAN));
+		//未来日チェック
+		if (service.miraibicheck(form.getExpireDateFrom()) || service.miraibicheck(form.getExpireDateTo())) {
+			
+			//未来日エラーの処理
+			model.addAttribute("msinfo004",source.getMessage("msinfo004", null,Locale.JAPAN));
+			return "bfmk02View";
+		}
+
+		//検索処理
+		List<UserInfoDto> userList = service.getAllUserInfo(form);
+		model.addAttribute("users",userList);
 		return "bfmk02View";
 	}
 

@@ -1,6 +1,17 @@
 @charset "UTF-8";
 
 テーブルサイズ
+/*#mainTable{
+	background-color: #FFF0E6;
+	border: solid 1px;
+	border-color: #ff5050;
+	height: auto;
+	max-width: 1200px;
+	max-height: 800px;
+}*/
+body{
+	background-color: #ffffff;
+}
 #mainTable{
 	background-color: #FFF0E6;
 	border: solid 1px #ff5050;
@@ -8,18 +19,11 @@
 	max-width: 1200px;
 	max-height: 800px;
 }
-/*body{
-	background-color: #ffffff;
-}*/
-/*.mainTable, tr{*/
-/*	background-color: #FFF0E6;*/
-/*	border: solid 1px #ff5050;*/
-/*	height: auto;*/
-/*}*/
 #row1,#row2,#row3,#row4,#row5,#row6{
 	background-color: #FFF0E6;
 	border: solid 1px #ff5050;
 	height: auto;
+	
 }
 /*tr.minitable{
 	height: 500px;
@@ -275,39 +279,81 @@ td.second2{
 	text-align: center;
 	align-items: center;
 }
-#col1{
+#col1,#colhead1{
 	width: 50px;
 	text-align: center;
 }
-#col2{
+#col2,#colhead2{
 	width: 80px;
 	text-align: center;
 }
-#col3{
+#col3,#colhead3{
 	width: 170px;
 	text-align: center;
 }
-#col4,#col6,#col7,#col8{
+#col4,#col6,#col7,#col8,#colhead4
+,#colhead6,#colhead7,#colhead8{
 	width: 120px;
 	text-align: center;
 }
-#col5{
+#col5,#colhead5{
 	width: 190px;
 	text-align: center;
 }
-#col9{
+#col9,#colhead9{
+	width: 200px;
+	text-align: center;
+}
+#col10,#colhead10{
+	width: 200px;
+	text-align: center;
+}
+#col11,#colhead11{
 	width: 160px;
 	text-align: center;
 }
-#col10{
-	width: 160px;
-	text-align: center;
+#colhead1{
+	border-top: solid 2px #cecece;
+	border-right: solid 2px #cecece;
+	border: solid 2px #cecece;
 }
-#col11{
-	width: 160px;
-	text-align: center;
+#colhead2{
+	border-top: solid 2px #cecece;
+	border-right: solid 2px #cecece;
 }
-#colhead{
+#colhead3{
+	border-top: solid 2px #cecece;
+	border-right: solid 2px #cecece;
+}
+#colhead4{
+	border-top: solid 2px #cecece;
+	border-right: solid 2px #cecece;
+}
+#colhead5{
+	border-top: solid 2px #cecece;
+	border-right: solid 2px #cecece;
+}
+#colhead6{
+	border-top: solid 2px #cecece;
+	border-right: solid 2px #cecece;
+}
+#colhead7{
+	border-top: solid 2px #cecece;
+	border-right: solid 2px #cecece;
+}
+#colhead8{
+	border-top: solid 2px #cecece;
+	border-right: solid 2px #cecece;
+}
+#colhead9{
+	border-top: solid 2px #cecece;
+	border-right: solid 2px #cecece;
+}
+#colhead10{
+	border-top: solid 2px #cecece;
+	border-right: solid 2px #cecece;
+}
+#colhead11{
 	border-top: solid 2px #cecece;
 	border-right: solid 2px #cecece;
 }

@@ -133,12 +133,12 @@ public class Bfmk02Service {
 		
 		// 空文字チェック
 		if (date.isBlank() || date.isEmpty()) {
-			return true;
+			return false;
 		}
 		
 		//受け取り側のフォーマット指定
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		
+
 		// 有効日の表示型をフォーマット
 		try {
 			Date d = format.parse(date);
@@ -148,5 +148,26 @@ public class Bfmk02Service {
 			return false;
 		}
 		return true;
+	}
+	
+	/**
+	 * 未来日チェック
+	 * @param date
+	 * @return 
+	 */
+	public boolean miraibicheck(String date) {
+
+		//今日の日付けを取得
+		Date today = new Date();
+		
+		//受け取り値のフォーマット
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			Date inputDay = format.parse(date);
+			return inputDay.after(today);
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 }

@@ -38,8 +38,8 @@
 					</tr>
 					<tr id="row5">
 						<td class="ColLeft" th:text="#{effectiveDate}"></td>
-						<td class="ColRight"><input class="upperinput" type="text" th:field="*{expireDateFrom}"/>
-							<label>～  </label><input class="upperinput" type="text" th:field="*{expireDateTo}"/></td>
+						<td class="ColRight"><input class="upperinput" type="date" th:field="*{expireDateFrom}"/>
+							<label>～  </label><input class="upperinput" type="date" th:field="*{expireDateTo}"/></td>
 					</tr>
 					<tr id="row6">
 						<td colspan="2" class="col">
@@ -48,6 +48,9 @@
 									href="/b-forme_Kojo/pc/002" th:text="#{return}"></a>
 								<!--<div class="messageColunm" th:text="${errorMeg}" th:if="errorMeg"></div>-->
 								<p class="messageColunm" type="text" readonly th:if="${msinfo001}" th:text="${msinfo001}"></p>
+								<p class="messageColunm" type="text" readonly th:if="${msinfo002}" th:text="${msinfo002}"></p>
+								<p class="messageColunm" type="text" readonly th:if="${msinfo003}" th:text="${msinfo003}"></p>
+								<p class="messageColunm" type="text" readonly th:if="${msinfo004}" th:text="${msinfo004}"></p>
 								<button class="search" type="submit" name="search"  
 									formaction="/b-forme_Kojo/pc/202" th:text="#{search}" th:disabled="${disabled}"></button>
 								<button class="clear" type="submit" name="clear" 
@@ -70,17 +73,17 @@
 								<table id="subTable">
 									<tbody>
 										<tr>
-											<th id="colhead"></th>
-											<th id="colhead" th:text="#{affilicateId}"></th>
-											<th id="colhead" th:text="#{affilicateName}"></th>
-											<th id="colhead" th:text="#{userId}"></th>
-											<th id="colhead" th:text="#{userName}"></th>
-											<th id="colhead" th:text="#{authDiv}"></th>
-											<th id="colhead" th:text="#{watchAuth}"></th>
-											<th id="colhead" th:text="#{oprAuth}"></th>
-											<th id="colhead" th:text="#{effDateFrom}"></th>
-											<th id="colhead" th:text="#{effDateTo}"></th>
-											<th id="colhead" th:text="#{pass}"></th> 
+											<th id="colhead1"></th>
+											<th id="colhead2" th:text="#{affilicateId}"></th>
+											<th id="colhead3" th:text="#{affilicateName}"></th>
+											<th id="colhead4" th:text="#{userId}"></th>
+											<th id="colhead5" th:text="#{userName}"></th>
+											<th id="colhead6" th:text="#{authDiv}"></th>
+											<th id="colhead7" th:text="#{watchAuth}"></th>
+											<th id="colhead8" th:text="#{oprAuth}"></th>
+											<th id="colhead9" th:text="#{effDateFrom}"></th>
+											<th id="colhead10" th:text="#{effDateTo}"></th>
+											<th id="colhead11" th:text="#{pass}"></th> 
 										</tr>
 										<tr th:each="user:${users}">
 											<td id="col1"><input type="checkbox" name="userId" th:value="${user.userId}" /></td>
