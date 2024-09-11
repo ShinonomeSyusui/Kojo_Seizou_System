@@ -165,4 +165,6 @@ public class Bfmk02Controller {
 		model.addAttribute("msinfo007",source.getMessage("msinfo007", null, Locale.JAPAN));
 		return "bfmk02View";
 	}
+	
+	
 }

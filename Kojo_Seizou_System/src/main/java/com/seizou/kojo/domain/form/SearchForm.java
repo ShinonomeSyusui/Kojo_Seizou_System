@@ -20,4 +20,11 @@ public class SearchForm {
 	private String expireDateTo;	//有効日(To)
 	private String pass;			//パスワード
 	private String delFlg;			//削除フラグ
+	
+	//ページネイション
+	private int count;              //総ユーザー数
+	private int first;              //最初のページ
+	private int prev;               //前ページ
+	private int next;               //次ページ
+	private int last;               //最後のページ
 }

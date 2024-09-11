@@ -18,10 +18,10 @@ import com.seizou.kojo.domain.repository.Bfmk02Repository;
 
 @Service
 public class Bfmk02Service {
-	
+
 	@Autowired
 	Bfmk02Repository repository;
-	
+
 	/**
 	 * 権限チェック
 	 * @param commonDto
@@ -87,7 +87,7 @@ public class Bfmk02Service {
 		}
 		return returnDtoList;
 	}
-	
+
 	/**
 	 * クリア
 	 * @param form
@@ -104,7 +104,7 @@ public class Bfmk02Service {
 		form.setExpireDateTo("");
 		return form;
 	}
-	
+
 	/**
 	 * 削除
 	 * @param commonDtoo
@@ -123,7 +123,7 @@ public class Bfmk02Service {
 		}
 		return "";
 	}
-	
+
 	/**
 	 * 入力チェック、日付け型変換
 	 * @param form
@@ -149,7 +149,7 @@ public class Bfmk02Service {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * 未来日チェック
 	 * @param date
