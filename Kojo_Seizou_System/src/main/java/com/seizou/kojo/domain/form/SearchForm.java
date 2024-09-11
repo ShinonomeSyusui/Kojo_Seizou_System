@@ -27,4 +27,6 @@ public class SearchForm {
 	private int prev;               //前ページ
 	private int next;               //次ページ
 	private int last;               //最後のページ
+	private int maxPage;            //総ページ数
+	private int currntPage;         //現在のページ
 }
