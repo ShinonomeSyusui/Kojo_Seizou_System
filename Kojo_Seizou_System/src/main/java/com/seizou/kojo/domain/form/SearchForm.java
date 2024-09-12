@@ -22,11 +22,11 @@ public class SearchForm {
 	private String delFlg;			//削除フラグ
 	
 	//ページネイション
-	private int count;              //総ユーザー数
-	private int first;              //最初のページ
-	private int prev;               //前ページ
-	private int next;               //次ページ
-	private int last;               //最後のページ
-	private int maxPage;            //総ページ数
-	private int currntPage;         //現在のページ
+	//private int count;              //総ユーザー数
+	//private int first;              //最初のページ
+	//private int prev;               //前ページ
+	//private int next;               //次ページ
+	//private int last;               //最後のページ
+	//private int maxPage;            //総ページ数
+	//private int currntPage;         //現在のページ
 }

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.seizou.kojo.domain.dao.UserInfoDao;
 import com.seizou.kojo.domain.dto.CommonDto;
 import com.seizou.kojo.domain.dto.UserInfoDto;
+import com.seizou.kojo.domain.form.PaginationForm;
 import com.seizou.kojo.domain.form.SearchForm;
 import com.seizou.kojo.domain.repository.Bfmk02Repository;
 
@@ -49,13 +50,13 @@ public class Bfmk02Service {
 	 * @param form
 	 * @return returnDtoList
 	 */
-	public List<UserInfoDto> getAllUserInfo(SearchForm form){
+	public List<UserInfoDto> getAllUserInfo(SearchForm form,PaginationForm form2){
 
 		// 戻り値を宣言
 		List<UserInfoDto> returnDtoList = new ArrayList<UserInfoDto>();
 
 		// 検索実行
-		List<Map<String, Object>> userMapList = repository.searchInfo(form);
+		List<Map<String, Object>> userMapList = repository.searchInfo(form,form2);
 
 		// DTOに各値を設定
 		for (Map<String, Object> map : userMapList) {

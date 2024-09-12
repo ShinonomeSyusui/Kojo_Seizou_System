@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.seizou.kojo.domain.dto.CommonDto;
 import com.seizou.kojo.domain.dto.UserInfoDto;
+import com.seizou.kojo.domain.form.PaginationForm;
 import com.seizou.kojo.domain.form.SearchForm;
 import com.seizou.kojo.domain.service.Bfmk02Service;
 
@@ -92,7 +93,7 @@ public class Bfmk02Controller {
 	 * @return bfmk02View
 	 */
 	@PostMapping(path = "/pc/202",params = "search")
-	public String search(@ModelAttribute SearchForm form, Model model) {
+	public String search(@ModelAttribute SearchForm form,PaginationForm form2, Model model) {
 
 		//日付け入力値のチェックと検索処理
 		if (service.dateFormat(form.getExpireDateFrom()) && service.dateFormat(form.getExpireDateTo())) {
@@ -111,7 +112,7 @@ public class Bfmk02Controller {
 		}
 
 		//検索処理
-		List<UserInfoDto> userList = service.getAllUserInfo(form);
+		List<UserInfoDto> userList = service.getAllUserInfo(form,form2);
 		model.addAttribute("users",userList);
 		return "bfmk02View";
 	}
@@ -166,5 +167,13 @@ public class Bfmk02Controller {
 		return "bfmk02View";
 	}
 	
-	
+	/**
+	 * ページネイションの前へ
+	 * @param pageFrom
+	 * @return
+	 */
+	@PostMapping(path = "/pc/202",params = "pageFrom")
+	public String pagination(@RequestParam("p") int pageFrom) {
+		return "bfmk02View";
+	}
 }

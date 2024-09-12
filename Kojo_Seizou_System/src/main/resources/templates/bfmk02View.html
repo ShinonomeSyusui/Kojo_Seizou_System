@@ -53,6 +53,7 @@
 								<p class="messageColunm" type="text" readonly th:if="${msinfo004}" th:text="${msinfo004}"></p>
 								<button class="search" type="submit" name="search"  
 									formaction="/b-forme_Kojo/pc/202" th:text="#{search}" th:disabled="${disabled}"></button>
+								<input type="hidden" name="offset" value="5"/>
 								<button class="clear" type="submit" name="clear" 
 									formaction="/b-forme_Kojo/pc/202" th:text="#{clear}" th:disabled="${disabled}"></button>
 							</div>
@@ -62,7 +63,7 @@
 							</div>
 							<div id="pagination_content" th:if="${users}">
 								<ul class="pagination">
-									<li id="first">&nbsp;<<&nbsp; </li>
+									<button name="first" type="submit" formaction="/b-forme_Kojo/pc/202">&nbsp;<<&nbsp; </button>
 									<li id="prev">&nbsp;<&nbsp; </li>
 									<li class="count"></li>
 									<li id="next">&nbsp;>&nbsp;</li>

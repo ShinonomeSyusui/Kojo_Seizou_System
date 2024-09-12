@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.seizou.kojo.domain.dto.CommonDto;
+import com.seizou.kojo.domain.form.PaginationForm;
 import com.seizou.kojo.domain.form.SearchForm;
 
 
@@ -91,7 +92,7 @@ public class Bfmk02Repository {
 	 * @param form
 	 * @return namedJdbc.queryForList(sql,joken);
 	 */
-	public List<Map<String, Object>> searchInfo(SearchForm form) {
+	public List<Map<String, Object>> searchInfo(SearchForm form,PaginationForm form2) {
 		
 		String sql = "SELECT "
 				+ "u.affilicate_id "						//所属ID
@@ -165,7 +166,9 @@ public class Bfmk02Repository {
 			joken.put("expireDateTo", form.getExpireDateTo());
 		}
 
-		sql += "ORDER BY u.affilicate_id ,u.user_id ";
+		sql += "ORDER BY u.affilicate_id ,u.user_id "
+				+ "LIMIT 5 OFFSET :offset";
+		joken.put("offset",form2.getOffset());
 
 		return namedJdbc.queryForList(sql,joken);
 	}
