@@ -53,7 +53,7 @@
 								<p class="messageColunm" type="text" readonly th:if="${msinfo004}" th:text="${msinfo004}"></p>
 								<button class="search" type="submit" name="search"  
 									formaction="/b-forme_Kojo/pc/202" th:text="#{search}" th:disabled="${disabled}"></button>
-								<input type="hidden" name="offset" value="5"/>
+								<input type="hidden" name="offset" value="0"/>
 								<button class="clear" type="submit" name="clear" 
 									formaction="/b-forme_Kojo/pc/202" th:text="#{clear}" th:disabled="${disabled}"></button>
 							</div>
@@ -63,11 +63,13 @@
 							</div>
 							<div id="pagination_content" th:if="${users}">
 								<ul class="pagination">
-									<button name="first" type="submit" formaction="/b-forme_Kojo/pc/202">&nbsp;<<&nbsp; </button>
-									<li id="prev">&nbsp;<&nbsp; </li>
-									<li class="count"></li>
-									<li id="next">&nbsp;>&nbsp;</li>
-									<li id="last">&nbsp;>>&nbsp;</li>
+									<button name="first" id="first" type="submit" value="0" formaction="/b-forme_Kojo/pc/202">&nbsp;<<&nbsp; </button>
+									<input type="hidden" name=offset>
+									<button name="prev" id="prev" type="submit" value="" formaction="/b-forme_Kojo/pc/202">&nbsp;<&nbsp; </button>
+									<span class="count">/</span>
+									<button name="next" id="next" type="submit" th:value="${next}" formaction="/b-forme_Kojo/pc/202">&nbsp;>&nbsp;</button>
+									<button name="last" id="last" type="submit" value="" formaction="/b-forme_Kojo/pc/202">&nbsp;>>&nbsp;</button>
+									<span th:text="${count}"></span>
 								</ul>
 							</div>
 							<div class="box" th:if="${users}">

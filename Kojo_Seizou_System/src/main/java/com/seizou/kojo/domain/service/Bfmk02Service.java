@@ -10,7 +10,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.seizou.kojo.domain.dao.UserInfoDao;
 import com.seizou.kojo.domain.dto.CommonDto;
 import com.seizou.kojo.domain.dto.UserInfoDto;
 import com.seizou.kojo.domain.form.PaginationForm;
@@ -35,16 +34,17 @@ public class Bfmk02Service {
 	}
 
 	/**
-	 * 
-	 * @param dao
-	 * @return
+	 * 全件数の取得
+	 * @param form2
+	 * @return count
 	 */
-	public String getSearchUser(UserInfoDao dao) {
-		String authority = "";
-		dao = (UserInfoDao) repository.getAllUserInfo();
-		return "";
+	public List<Integer> getAllCount(SearchForm form, PaginationForm form2) {
+		List<Integer> count = repository.searchInfoCount(form, form2);
+		
+		
+		return count;
 	}
-
+	
 	/**
 	 * 検索
 	 * @param form

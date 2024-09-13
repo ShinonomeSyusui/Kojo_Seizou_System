@@ -16,4 +16,5 @@ public class PaginationForm {
 		private int maxPage;            //総ページ数
 		private int currntPage;         //現在のページ
 		private int offset;             //オフセット値
+		private int limit;
 }

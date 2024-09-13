@@ -114,6 +114,7 @@ public class Bfmk02Controller {
 		//検索処理
 		List<UserInfoDto> userList = service.getAllUserInfo(form,form2);
 		model.addAttribute("users",userList);
+		model.addAttribute("count",form2.getCount());
 		return "bfmk02View";
 	}
 
@@ -168,12 +169,58 @@ public class Bfmk02Controller {
 	}
 	
 	/**
+	 * ページネイションの最初へ
+	 * @param pageFrom
+	 * @return 
+	 */
+	@PostMapping(path = "/pc/202",params = "first")
+	public String paginationFrom(@RequestParam(value = "first") int offset, 
+			@ModelAttribute SearchForm form, 
+			PaginationForm form2, Model model) {
+		form2.setOffset(offset);
+		search(form, form2, model);
+		return "bfmk02View";
+	}
+	
+	/**
 	 * ページネイションの前へ
 	 * @param pageFrom
-	 * @return
+	 * @return 
 	 */
-	@PostMapping(path = "/pc/202",params = "pageFrom")
-	public String pagination(@RequestParam("p") int pageFrom) {
+	@PostMapping(path = "/pc/202",params = "prev")
+	public String paginationPrev(@RequestParam(value = "prev") int offset, 
+			@ModelAttribute SearchForm form, 
+			PaginationForm form2, Model model) {
+		form2.setOffset(offset);
+		search(form, form2, model);
+		return "bfmk02View";
+	}
+	
+	/**
+	 * ページネイションの次へ
+	 * @param pageFrom
+	 * @return 
+	 */
+	@PostMapping(path = "/pc/202",params = "next")
+	public String paginationNext(@RequestParam(value = "next") int offset, 
+			@ModelAttribute SearchForm form, 
+			PaginationForm form2, Model model) {
+		form2.setOffset(offset);
+		search(form, form2, model);
+		return "bfmk02View";
+	}
+	
+	/**
+	 * ページネイションの最後へ
+	 * @param pageFrom
+	 * @return 
+	 */
+	@PostMapping(path = "/pc/202",params = "last")
+	public String paginationLast(@RequestParam(value = "last") int offset, 
+			@ModelAttribute SearchForm form, 
+			PaginationForm form2, Model model) {
+		form2.setOffset(offset);
+		search(form, form2, model);
 		return "bfmk02View";
 	}
 }
