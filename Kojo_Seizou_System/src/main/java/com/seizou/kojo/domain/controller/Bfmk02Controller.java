@@ -102,7 +102,7 @@ public class Bfmk02Controller {
 			model.addAttribute("msinfo002",source.getMessage("msinfo002", null, Locale.JAPAN));
 			return "bfmk02View";
 		}
-		
+
 		//未来日チェック
 		if (service.miraibicheck(form.getExpireDateFrom()) || service.miraibicheck(form.getExpireDateTo())) {
 			
@@ -113,8 +113,10 @@ public class Bfmk02Controller {
 
 		//検索処理
 		List<UserInfoDto> userList = service.getAllUserInfo(form,form2);
+		
 		model.addAttribute("users",userList);
-		model.addAttribute("count",form2.getCount());
+		
+		model.addAttribute("count",service.countAll(form));
 		return "bfmk02View";
 	}
 

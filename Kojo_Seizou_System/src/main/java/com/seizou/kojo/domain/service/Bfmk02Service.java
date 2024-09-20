@@ -88,6 +88,12 @@ public class Bfmk02Service {
 		}
 		return returnDtoList;
 	}
+	
+	public int countAll(SearchForm form) {
+		int allCou = repository.allCountSql(form);
+		
+		return allCou;
+	}
 
 	/**
 	 * クリア
