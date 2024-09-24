@@ -89,6 +89,11 @@ public class Bfmk02Service {
 		return returnDtoList;
 	}
 	
+	/**
+	 * 全レコード数取得
+	 * @param form
+	 * @return allCou
+	 */
 	public int countAll(SearchForm form) {
 		int allCou = repository.allCountSql(form);
 		
@@ -176,5 +181,45 @@ public class Bfmk02Service {
 			e.printStackTrace();
 			return false;
 		}
+	}
+	
+	/**
+	 * 次ページへの処理
+	 * @param form2
+	 * @return returnForm2
+	 */
+	public PaginationForm nextPage(PaginationForm form2) {
+		
+		//戻り値の宣言
+		PaginationForm returnForm2 = new PaginationForm();
+		
+		int currntPage = 0;				//現在のページ
+		int limit = 5;					//リミット値(1ページあたりの表示レコード数)
+		int maxPage = 0;				//最大ページ数
+		int count = form2.getCount();	//全レコード数
+		
+		maxPage = count / limit;
+		
+		//offsetの値
+		int offsetNum = form2.getOffset();
+		if (offsetNum >= 0) {
+			++offsetNum;
+			returnForm2.setOffset(offsetNum);
+		}
+		return returnForm2;
+	}
+	
+	public int totalPages(PaginationForm form2,int count) {
+
+		//戻り値を宣言
+		int totalPagesNum = 0;
+		
+		totalPagesNum = count / form2.getLimit();
+
+		if (totalPagesNum % form2.getLimit() != 0 
+				|| totalPagesNum == 0) {
+			++totalPagesNum;
+		}
+		return totalPagesNum;
 	}
 }

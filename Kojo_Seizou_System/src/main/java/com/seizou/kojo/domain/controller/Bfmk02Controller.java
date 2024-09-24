@@ -111,12 +111,31 @@ public class Bfmk02Controller {
 			return "bfmk02View";
 		}
 
+		final int LIMIT = 5; 
+		form2.setLimit(LIMIT);
+		
+		int count = service.countAll(form);
+		
+		int totalPages = count / LIMIT;
+		if (totalPages % LIMIT != 0 ||
+				totalPages == 0) {
+			++totalPages;
+		}
+		
+		//現在ページ
+		int offset = form2.getOffset();
+		
+		int currentPage = offset / LIMIT + 1;
+		
+		
 		//検索処理
 		List<UserInfoDto> userList = service.getAllUserInfo(form,form2);
 		
 		model.addAttribute("users",userList);
+		model.addAttribute("count",count);
+		model.addAttribute("totalPages",totalPages);
+		model.addAttribute("currentPage",currentPage);
 		
-		model.addAttribute("count",service.countAll(form));
 		return "bfmk02View";
 	}
 
@@ -204,11 +223,21 @@ public class Bfmk02Controller {
 	 * @return 
 	 */
 	@PostMapping(path = "/pc/202",params = "next")
-	public String paginationNext(@RequestParam(value = "next") int offset, 
+	public String paginationNextAndPrev(@RequestParam(value = "next") int offset, 
 			@ModelAttribute SearchForm form, 
 			PaginationForm form2, Model model) {
-		form2.setOffset(offset);
+
+		//全ページ数
+		
+		
+		//現在ページの表示
+		
+		
+		//検索処理
 		search(form, form2, model);
+
+		//
+		
 		return "bfmk02View";
 	}
 	

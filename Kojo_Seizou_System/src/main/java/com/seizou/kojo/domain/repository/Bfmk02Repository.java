@@ -245,62 +245,17 @@ public class Bfmk02Repository {
 				+ "u.affilicate_id = b.affilicate_id "
 				+ "WHERE "
 				+ "u.del_flg = '0' ";							//削除フラグ
-		
+
 		List<Object> returnJouken = joukenSql(form);
-		
+
 		sql += returnJouken.get(0);
-		
+
 		Map<String, Object> joken = (Map<String, Object>) returnJouken.get(1);
 
-		/*Map<String, Object> joken = new HashMap<String, Object>();
-		
-		// 所属ID
-		if(!(form.getAffilicateId().isBlank() || form.getAffilicateId().isEmpty())) {
-			sql += "AND u.affilicate_id = :affilicateId ";
-			joken.put("affilicateId", form.getAffilicateId());
-		}
-		
-		// ユーザーID
-		if(!(form.getUserId().isBlank() || form.getUserId().isEmpty())) {
-			sql += "AND u.user_id = :userId ";
-			joken.put("userId", form.getUserId());
-		}
-		
-		// ユーザー名
-		if(!(form.getUserName().isBlank() || form.getUserName().isEmpty())) {
-			sql += "AND u.user_name LIKE :userName ";
-			joken.put("userName", "%" + form.getUserName() + "%");
-		}
-		
-		// 権限区分
-		if (!(form.getAuthDiv().size() == 0 || form.getAuthDiv().size() == 3)) {
-			sql += "AND u.auth_div IN (:authDiv) ";
-			joken.put("authDiv", form.getAuthDiv());
-		}
-		
-		// 有効日(From)
-		if (!(form.getExpireDateFrom().isBlank() || form.getExpireDateFrom().isEmpty())) {
-			sql += "AND u.expire_date_from = :expireDateFrom ";
-			joken.put("expireDateFrom", form.getExpireDateFrom());
-		}
-		
-		// 有効日(To)
-		if (!(form.getExpireDateTo().isBlank() || form.getExpireDateTo().isEmpty())) {
-			sql += "AND u.expire_date_to = :expireDateTo ";
-			joken.put("expireDateTo", form.getExpireDateTo());
-		}*/
-
 		sql += "ORDER BY u.affilicate_id ,u.user_id "
-				+ "LIMIT 5 OFFSET :offset";
+				+ "LIMIT :limit OFFSET :offset";
 		joken.put("offset",form2.getOffset());
-		
-
-		// 件数取得クエリ
-	    //String countSql = "SELECT COUNT(*) FROM (" + sql + ") AS count_query";
-		/*String countSql = "SELECT COUNT(*) FROM user_info WHERE del_flg = '0' ";
-		int totalCount = namedJdbc.queryForObject(countSql, joken, Integer.class);*/
-
-		//joken.put("count",totalCount);
+		joken.put("limit",form2.getLimit());
 
 		return namedJdbc.queryForList(sql,joken);
 	}

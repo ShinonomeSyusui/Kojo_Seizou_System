@@ -64,11 +64,12 @@
 							<div id="pagination_content" th:if="${users}">
 								<ul class="pagination">
 									<button name="first" id="first" type="submit" value="0" formaction="/b-forme_Kojo/pc/202">&nbsp;<<&nbsp; </button>
-									<input type="hidden" name=offset>
-									<button name="prev" id="prev" type="submit" value="" formaction="/b-forme_Kojo/pc/202">&nbsp;<&nbsp; </button>
-									<span class="count">/</span>
+									<input type="hidden" name=offset/>
+									<button name="prev" id="prev" type="submit" th:value="${prev}" formaction="/b-forme_Kojo/pc/202">&nbsp;<&nbsp; </button>
+									<span class="count" th:text="${currentPage} + ' / ' + ${totalPages}">/</span>
 									<button name="next" id="next" type="submit" th:value="${next}" formaction="/b-forme_Kojo/pc/202">&nbsp;>&nbsp;</button>
-									<button name="last" id="last" type="submit" value="" formaction="/b-forme_Kojo/pc/202">&nbsp;>>&nbsp;</button>
+									<input type="hidden" name=next/>
+									<button name="last" id="last" type="submit" th:value="${last}" formaction="/b-forme_Kojo/pc/202">&nbsp;>>&nbsp;</button>
 									<p>総数<span th:text="${count}"></span>件</p>
 								</ul>
 							</div>
