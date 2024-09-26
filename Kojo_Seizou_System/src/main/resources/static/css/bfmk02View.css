@@ -224,6 +224,11 @@ td.second2{
     cursor: pointer;
 }
 
+#pagination_content{
+	margin-right: auto;
+	margin-left: auto;
+}
+
 .pagination .count {
     font-weight: normal;
     color: #000000;

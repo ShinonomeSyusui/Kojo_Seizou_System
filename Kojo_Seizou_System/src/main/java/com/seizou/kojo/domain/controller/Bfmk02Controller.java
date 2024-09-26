@@ -1,7 +1,6 @@
 package com.seizou.kojo.domain.controller;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -110,24 +109,14 @@ public class Bfmk02Controller {
 			return "bfmk02View";
 		}
 
-		List<Integer> pages = new ArrayList<Integer>();
-
 		//ページネイションの内部処理
-		pages = pagination(form, form2);
-
+		pagination(form, form2, model);
 
 		//検索処理
 		List<UserInfoDto> userList = service.getAllUserInfo(form, form2);
 
 		model.addAttribute("users", userList);
-		model.addAttribute("count", pages.get(0));
-		model.addAttribute("totalPages", pages.get(1));
-		model.addAttribute("currentPage", pages.get(2));
-		model.addAttribute("next",pages.get(3));
-		model.addAttribute("prev",pages.get(4));
 
-		//pagination(form, form2, model);
-		
 		return "bfmk02View";
 	}
 
@@ -195,40 +184,6 @@ public class Bfmk02Controller {
 		return "bfmk02View";
 	}
 
-//	/**
-//	 * ページネイションの前へ
-//	 * @param pageFrom
-//	 * @return 
-//	 */
-//	@PostMapping(path = "/pc/202", params = "prev")
-//	public String paginationPrev(@RequestParam(value = "prev") int offset,
-//			@ModelAttribute SearchForm form,
-//			PaginationForm form2, Model model) {
-//		form2.setOffset(offset);
-//		search(form, form2, model);
-//		return "bfmk02View";
-//	}
-
-	/**
-	 * ページネイションの次へ
-	 * @param pageFrom
-	 * @return 
-	 */
-	@PostMapping(path = "/pc/202", params = "next")
-	public String paginationNextAndPrev(@RequestParam(value = "next") int next,
-			@ModelAttribute SearchForm form,
-			PaginationForm form2, Model model) {
-
-		int nextNum = 1;
-		form2.setNext(nextNum);
-
-		//検索処理
-		search(form, form2, model);
-
-		//
-
-		return "bfmk02View";
-	}
 
 	/**
 	 * ページネイションの最後へ
@@ -248,12 +203,9 @@ public class Bfmk02Controller {
 	 * ページネイションの内部処理
 	 * @param form
 	 * @param form2
-	 * @return pages
+	 * @param model
 	 */
-	private List<Integer> pagination(SearchForm form, PaginationForm form2) {
-
-		//戻り値を宣言
-		List<Integer> pages = new ArrayList<Integer>();
+	private void pagination(SearchForm form, PaginationForm form2, Model model) {
 
 		//1ページにおける表示件数
 		final int LIMIT = 5;
@@ -279,19 +231,25 @@ public class Bfmk02Controller {
 		//前のoffset値
 		int prevNum = offset - LIMIT;
 		
-		pages.add(count);
-		pages.add(totalPages);
-		pages.add(currentPage);
-		pages.add(nextNum);
-		pages.add(prevNum);
+		//最終ページのoffset値
+		int last = (totalPages - 1) * LIMIT;
 		
+		//最初のページと戻るボタンの処理
+		if (currentPage <= 1) {
+			model.addAttribute("firstPage",true);
+		}
+
+		//最後のページと進むボタンの処理
+		if (currentPage == totalPages) {
+			model.addAttribute("lastPage", true);
+		}
+
 		//モデルに格納
-		//model.addAttribute("count", count);
-		//model.addAttribute("totalPages", totalPages);
-		//model.addAttribute("currentPage", currentPage);
-		//model.addAttribute("next", nextNum);
-		//model.addAttribute("prev", prevNum);
-		
-		return pages;
+		model.addAttribute("count", count);
+		model.addAttribute("totalPages", totalPages);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("next", nextNum);
+		model.addAttribute("prev", prevNum);
+		model.addAttribute("last", last);
 	}
 }
