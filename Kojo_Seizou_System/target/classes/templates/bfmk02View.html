@@ -44,25 +44,30 @@
 					<tr id="row6">
 						<td colspan="2" class="col">
 							<div class="buttons">
-								<a class="back" type="submit" name="back" 
-									href="/b-forme_Kojo/pc/002" th:text="#{return}"></a>
-								<!--<div class="messageColunm" th:text="${errorMeg}" th:if="errorMeg"></div>-->
-								<p class="messageColunm" type="text" readonly th:if="${msinfo001}" th:text="${msinfo001}"></p>
-								<p class="messageColunm" type="text" readonly th:if="${msinfo002}" th:text="${msinfo002}"></p>
-								<p class="messageColunm" type="text" readonly th:if="${msinfo003}" th:text="${msinfo003}"></p>
-								<p class="messageColunm" type="text" readonly th:if="${msinfo004}" th:text="${msinfo004}"></p>
-								<button class="search" type="submit" name="offset" value="0"  
-									formaction="/b-forme_Kojo/pc/202" th:text="#{search}" th:disabled="${disabled}"></button>
-								<button class="clear" type="submit" name="clear" 
-									formaction="/b-forme_Kojo/pc/202" th:text="#{clear}" th:disabled="${disabled}"></button>
+								<div class="backAndMessages">
+									<a class="back" type="submit" name="back" 
+										href="/b-forme_Kojo/pc/002" th:text="#{return}"></a>
+									<!--<div class="messageColunm" th:text="${errorMeg}" th:if="errorMeg"></div>-->
+									<p class="messageColunm" type="text" readonly th:if="${msinfo001}" th:text="${msinfo001}"></p>
+									<p class="messageColunm" type="text" readonly th:if="${msinfo002}" th:text="${msinfo002}"></p>
+									<p class="messageColunm" type="text" readonly th:if="${msinfo003}" th:text="${msinfo003}"></p>
+									<p class="messageColunm" type="text" readonly th:if="${msinfo004}" th:text="${msinfo004}"></p>
+									<p class="messageColunm" type="text" readonly th:if="${msinfo008}" th:text="${msinfo008}"></p>
+								</div>
+								<div class="searchAndClear">
+									<button class="search" type="submit" name="offset" value="0"  
+										formaction="/b-forme_Kojo/pc/202" th:text="#{search}" th:disabled="${disabled}"></button>
+									<button class="clear" type="submit" name="clear" 
+										formaction="/b-forme_Kojo/pc/202" th:text="#{clear}" th:disabled="${disabled}"></button>
+								</div>	
 							</div>
-							<div>
+							<div th:if="${users}">
 								<button class="delete" type="submit" name="delete" 
 									formaction="/b-forme_Kojo/pc/202" th:text="#{delete}"></button>
 							</div>
 							<div id="pagination_content" th:if="${users}">
 								<ul class="pagination">
-									<button name="first" id="first" type="submit" value="0" formaction="/b-forme_Kojo/pc/202" th:unless="${firstPage}">&nbsp;&lt;&lt;&nbsp; </button>
+									<button name="offset" id="first" type="submit" th:value="${first}" formaction="/b-forme_Kojo/pc/202" th:unless="${firstPage}">&nbsp;&lt;&lt;&nbsp; </button>
 									<button name="offset" id="prev" type="submit" th:value="${prev}" formaction="/b-forme_Kojo/pc/202" th:unless="${firstPage}">&nbsp;&lt;&nbsp; </button>
 									<span class="count" th:text="${currentPage} + ' / ' + ${totalPages}">/</span>
 									<button name="offset" id="next" type="submit" th:value="${next}" formaction="/b-forme_Kojo/pc/202" th:unless="${lastPage}">&nbsp;&gt;&nbsp; </button>

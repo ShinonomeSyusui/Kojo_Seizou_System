@@ -115,8 +115,18 @@ public class Bfmk02Controller {
 		//検索処理
 		List<UserInfoDto> userList = service.getAllUserInfo(form, form2);
 
+		
+		
+		//検索結果が該当なしの表示処理
+		if (userList.isEmpty()) {
+			model.addAttribute("msinfo008",
+					source.getMessage("msinfo008", null, Locale.JAPAN));
+			return init(null, form, model);
+		}
+		
 		model.addAttribute("users", userList);
 
+		System.out.println(userList);
 		return "bfmk02View";
 	}
 
@@ -164,38 +174,9 @@ public class Bfmk02Controller {
 		}
 
 		//削除処理
-		service.deleteUser(commonDto, id);
+		service.deleteUser(id);
 		clear(commonDto, form, model);
 		model.addAttribute("msinfo007", source.getMessage("msinfo007", null, Locale.JAPAN));
-		return "bfmk02View";
-	}
-
-	/**
-	 * ページネイションの最初へ
-	 * @param pageFrom
-	 * @return 
-	 */
-	@PostMapping(path = "/pc/202", params = "first")
-	public String paginationFrom(@RequestParam(value = "first") int offset,
-			@ModelAttribute SearchForm form,
-			PaginationForm form2, Model model) {
-		form2.setOffset(offset);
-		search(form, form2, model);
-		return "bfmk02View";
-	}
-
-
-	/**
-	 * ページネイションの最後へ
-	 * @param pageFrom
-	 * @return 
-	 */
-	@PostMapping(path = "/pc/202", params = "last")
-	public String paginationLast(@RequestParam(value = "last") int offset,
-			@ModelAttribute SearchForm form,
-			PaginationForm form2, Model model) {
-		form2.setOffset(offset);
-		search(form, form2, model);
 		return "bfmk02View";
 	}
 
@@ -224,32 +205,35 @@ public class Bfmk02Controller {
 		//現在ページ
 		int offset = form2.getOffset();
 		int currentPage = offset / LIMIT + 1;
+		
+		//最初のページのoffset値
+		int firstNum = 0;
 
 		//次のoffset値
 		int nextNum = offset + LIMIT;
-		
+
 		//前のoffset値
 		int prevNum = offset - LIMIT;
-		
+
 		//最終ページのoffset値
 		int last = (totalPages - 1) * LIMIT;
-		
-		//最初のページと戻るボタンの処理
+
+		//最初のページと戻るボタンの非表示処理
 		if (currentPage <= 1) {
 			model.addAttribute("firstPage",true);
 		}
 
-		//最後のページと進むボタンの処理
+		//最後のページと進むボタンの非表示処理
 		if (currentPage == totalPages) {
 			model.addAttribute("lastPage", true);
 		}
 
-		//モデルに格納
-		model.addAttribute("count", count);
-		model.addAttribute("totalPages", totalPages);
-		model.addAttribute("currentPage", currentPage);
-		model.addAttribute("next", nextNum);
-		model.addAttribute("prev", prevNum);
-		model.addAttribute("last", last);
+		model.addAttribute("count", count);					//総レコード数
+		model.addAttribute("totalPages", totalPages);		//全ページ数
+		model.addAttribute("currentPage", currentPage);		//現在ページ
+		model.addAttribute("first",firstNum);				//最初のページのoffset値
+		model.addAttribute("prev", prevNum);				//前のページのoffset値
+		model.addAttribute("next", nextNum);				//次のページのoffset値
+		model.addAttribute("last", last);					//最後のページのoffset値
 	}
 }
