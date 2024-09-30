@@ -6,13 +6,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.seizou.kojo.domain.dto.CommonDto;
+import com.seizou.kojo.domain.dto.PaginationDto;
 import com.seizou.kojo.domain.dto.UserInfoDto;
-import com.seizou.kojo.domain.form.PaginationForm;
 import com.seizou.kojo.domain.form.SearchForm;
 import com.seizou.kojo.domain.repository.Bfmk02Repository;
 
@@ -38,13 +36,13 @@ public class Bfmk02Service {
 	 * @param form
 	 * @return returnDtoList
 	 */
-	public List<UserInfoDto> getAllUserInfo(SearchForm form,PaginationForm form2){
+	public List<UserInfoDto> getAllUserInfo(SearchForm form,PaginationDto pageDto){
 
 		// 戻り値を宣言
 		List<UserInfoDto> returnDtoList = new ArrayList<UserInfoDto>();
 
 		// 検索実行
-		List<Map<String, Object>> userMapList = repository.searchInfo(form,form2);
+		List<Map<String, Object>> userMapList = repository.searchInfo(form,pageDto);
 
 		// DTOに各値を設定
 		for (Map<String, Object> map : userMapList) {

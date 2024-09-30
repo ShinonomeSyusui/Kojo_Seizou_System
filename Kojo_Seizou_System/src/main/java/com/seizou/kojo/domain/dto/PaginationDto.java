@@ -1,11 +1,11 @@
-package com.seizou.kojo.domain.form;
+package com.seizou.kojo.domain.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class PaginationForm {
+public class PaginationDto {
 
 	//ページネイション
 	private int count;              //総ユーザー数

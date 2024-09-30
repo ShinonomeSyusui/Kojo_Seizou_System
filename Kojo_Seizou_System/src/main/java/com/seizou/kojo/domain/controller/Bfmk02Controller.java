@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -14,10 +13,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import com.seizou.kojo.domain.dto.CommonDto;
+import com.seizou.kojo.domain.dto.PaginationDto;
 import com.seizou.kojo.domain.dto.UserInfoDto;
-import com.seizou.kojo.domain.form.PaginationForm;
 import com.seizou.kojo.domain.form.SearchForm;
 import com.seizou.kojo.domain.service.Bfmk02Service;
 
@@ -87,11 +85,12 @@ public class Bfmk02Controller {
 	/**
 	 * 検索
 	 * @param form
+	 * @param pageDto
 	 * @param model
-	 * @return bfmk02View
+	 * @return
 	 */
 	@PostMapping(path = "/pc/202", params = "offset")
-	public String search(@ModelAttribute SearchForm form, PaginationForm form2, Model model) {
+	public String search(@ModelAttribute SearchForm form, PaginationDto pageDto, Model model) {
 
 		//日付け入力値のチェックと検索処理
 		if (service.dateFormat(form.getExpireDateFrom()) && service.dateFormat(form.getExpireDateTo())) {
@@ -110,10 +109,10 @@ public class Bfmk02Controller {
 		}
 
 		//ページネイションの内部処理
-		pagination(form, form2, model);
+		pagination(form, pageDto, model);
 
 		//検索処理
-		List<UserInfoDto> userList = service.getAllUserInfo(form, form2);
+		List<UserInfoDto> userList = service.getAllUserInfo(form, pageDto);
 
 		
 		
@@ -129,6 +128,32 @@ public class Bfmk02Controller {
 		System.out.println(userList);
 		return "bfmk02View";
 	}
+
+	/**
+     * 削除
+     * @param form
+     * @param model
+     * @return
+     */
+    @PostMapping(path = "/pc/202", params = "delete")
+    public String delete(CommonDto commonDto,
+            @RequestParam(value = "userIds", required = false) List<String> id,
+            @ModelAttribute SearchForm form, Model model) {
+
+        // 削除対象未選択時
+        if (id == null) {
+            model.addAttribute("msinfo005", source.getMessage("msinfo005", null, Locale.JAPAN));
+            clear(commonDto, form, model);
+            System.out.println(model);
+            return "bfmk02View";
+        }
+
+        //削除処理
+        service.deleteUser(id);
+        clear(commonDto, form, model);
+        model.addAttribute("msinfo007", source.getMessage("msinfo007", null, Locale.JAPAN));
+        return "bfmk02View";
+    }
 
 	/**
 	 * クリア
@@ -155,42 +180,16 @@ public class Bfmk02Controller {
 	}
 
 	/**
-	 * 削除
-	 * @param form
-	 * @param model
-	 * @return
-	 */
-	@PostMapping(path = "/pc/202", params = "delete")
-	public String delete(CommonDto commonDto,
-			@RequestParam(value = "userIds", required = false) List<String> id,
-			@ModelAttribute SearchForm form, Model model) {
-
-		// 削除対象未選択時
-		if (id == null) {
-			model.addAttribute("msinfo005", source.getMessage("msinfo005", null, Locale.JAPAN));
-			clear(commonDto, form, model);
-			System.out.println(model);
-			return "bfmk02View";
-		}
-
-		//削除処理
-		service.deleteUser(id);
-		clear(commonDto, form, model);
-		model.addAttribute("msinfo007", source.getMessage("msinfo007", null, Locale.JAPAN));
-		return "bfmk02View";
-	}
-
-	/**
 	 * ページネイションの内部処理
 	 * @param form
-	 * @param form2
+	 * @param pageDto
 	 * @param model
 	 */
-	private void pagination(SearchForm form, PaginationForm form2, Model model) {
+	private void pagination(SearchForm form, PaginationDto pageDto, Model model) {
 
 		//1ページにおける表示件数
 		final int LIMIT = 5;
-		form2.setLimit(LIMIT);
+		pageDto.setLimit(LIMIT);
 
 		//全レコード数
 		int count = service.countAll(form);
@@ -203,7 +202,7 @@ public class Bfmk02Controller {
 		}
 
 		//現在ページ
-		int offset = form2.getOffset();
+		int offset = pageDto.getOffset();
 		int currentPage = offset / LIMIT + 1;
 		
 		//最初のページのoffset値
@@ -231,7 +230,7 @@ public class Bfmk02Controller {
 		model.addAttribute("count", count);					//総レコード数
 		model.addAttribute("totalPages", totalPages);		//全ページ数
 		model.addAttribute("currentPage", currentPage);		//現在ページ
-		model.addAttribute("first",firstNum);				//最初のページのoffset値
+		model.addAttribute("first", firstNum);				//最初のページのoffset値
 		model.addAttribute("prev", prevNum);				//前のページのoffset値
 		model.addAttribute("next", nextNum);				//次のページのoffset値
 		model.addAttribute("last", last);					//最後のページのoffset値

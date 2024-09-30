@@ -4,14 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
-
 import com.seizou.kojo.domain.dto.CommonDto;
-import com.seizou.kojo.domain.form.PaginationForm;
+import com.seizou.kojo.domain.dto.PaginationDto;
 import com.seizou.kojo.domain.form.SearchForm;
 
 
@@ -53,7 +51,7 @@ public class Bfmk02Repository {
 	 * @param form
 	 * @return namedJdbc.queryForList(sql,joken);
 	 */
-	public List<Map<String, Object>> searchInfo(SearchForm form,PaginationForm form2) {
+	public List<Map<String, Object>> searchInfo(SearchForm form,PaginationDto pageDto) {
 		
 		String sql = "SELECT "
 				+ "u.affilicate_id "							//所属ID
@@ -97,8 +95,8 @@ public class Bfmk02Repository {
 
 		sql += "ORDER BY u.affilicate_id ,u.user_id "
 				+ "LIMIT :limit OFFSET :offset";
-		joken.put("offset",form2.getOffset());
-		joken.put("limit",form2.getLimit());
+		joken.put("offset",pageDto.getOffset());
+		joken.put("limit",pageDto.getLimit());
 
 		return namedJdbc.queryForList(sql,joken);
 	}
