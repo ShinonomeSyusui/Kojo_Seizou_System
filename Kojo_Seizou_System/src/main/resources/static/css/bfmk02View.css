@@ -163,7 +163,7 @@ td.second2{
 }
 
 .pagination{
-/*	display: grid;*/
+	display: grid;
 	grid-template-rows: 45px 1fr;
 }
 
