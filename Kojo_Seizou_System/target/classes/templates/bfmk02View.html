@@ -69,16 +69,17 @@
 								<ul class="pagination">
 									<button name="offset" id="first" type="submit" th:value="${first}" formaction="/b-forme_Kojo/pc/202" th:unless="${firstPage}">&nbsp;&lt;&lt;&nbsp; </button>
 									<button name="offset" id="prev" type="submit" th:value="${prev}" formaction="/b-forme_Kojo/pc/202" th:unless="${firstPage}">&nbsp;&lt;&nbsp; </button>
-									<span class="count" th:text="${currentPage} + ' / ' + ${totalPages}">/</span>
+									<span id=pageCount class="count" th:text="${currentPage} + ' / ' + ${totalPages}">/</span>
 									<button name="offset" id="next" type="submit" th:value="${next}" formaction="/b-forme_Kojo/pc/202" th:unless="${lastPage}">&nbsp;&gt;&nbsp; </button>
 									<button name="offset" id="last" type="submit" th:value="${last}" formaction="/b-forme_Kojo/pc/202" th:unless="${lastPage}">&nbsp;&gt;&gt;&nbsp; </button>
-									<p>総数<span th:text="${count}"></span>件</p>
+									<span id="blankCol">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+									<span id="allCount">総数<span th:text="${count}"></span>件</span>
 								</ul>
 							</div>
 							<div class="box" th:if="${users}">
 								<table id="subTable">
 									<tbody id="secondTable">
-										<tr>
+										<tr id="innerth">
 											<th id="colhead1"></th>
 											<th id="colhead2" th:text="#{affilicateId}"></th>
 											<th id="colhead3" th:text="#{affilicateName}"></th>
@@ -91,7 +92,7 @@
 											<th id="colhead10" th:text="#{effDateTo}"></th>
 											<th id="colhead11" th:text="#{pass}"></th> 
 										</tr>
-										<tr th:each="user:${users}">
+										<tr th:each="user:${users}" id="innertd">
 											<td id="col1"><input type="checkbox" name="userId" th:value="${user.userId}" /></td>
 											<td id="col2" th:text="${user.affilicateId}"></td>
 											<td id="col3" th:text="${user.affilicateName}"></td>

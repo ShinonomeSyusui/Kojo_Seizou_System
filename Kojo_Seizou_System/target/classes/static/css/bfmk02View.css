@@ -121,95 +121,6 @@ button{
 	margin-right: 15px;
 }
 
-/*table.secondTable{
-	overflow-x: auto;
-	height: auto;
-	margin-top: 15px;
-	margin-right: 40px;
-	margin-left: 40px;
-	max-width: 1100px;
-	
-}
-th.second{
-	background-color: #e1e1ff;
-	border: solid 3px #cecece;
-	padding: 0px;
-	height: 50px;
-	text-align: start;
-}*/
-
-
-/*th.secondth1{*/
-/*	background-color: #e1e1ff;*/
-/*	border: solid 3px #cecece;*/
-/*	padding: 0px;*/
-/*	width: 60px;*/
-/*	height: 50px;*/
-/*}*/
-/*th.secondth2{*/
-/*	background-color: #e1e1ff;*/
-/*	border: solid 3px #cecece;*/
-/*	padding: 0px;*/
-/*	width: 60px;*/
-/*	height: 50px;*/
-/*}*/
-/*th.secondth3{*/
-/*	background-color: #e1e1ff;*/
-/*	border: solid 3px #cecece;*/
-/*	padding: 0px;*/
-/*	width: 60px;*/
-/*	height: 50px;*/
-/*}*/
-/*th.secondth4{*/
-/*	background-color: #e1e1ff;*/
-/*	border: solid 3px #cecece;*/
-/*	padding: 0px;*/
-/*	width: 60px;*/
-/*	height: 50px;*/
-/*}*/
-/*th.secondth5{*/
-/*	background-color: #e1e1ff;*/
-/*	border: solid 3px #cecece;*/
-/*	padding: 0px;*/
-/*	width: 60px;*/
-/*	height: 50px;*/
-/*}*/
-/*th.secondth6{*/
-/*	background-color: #e1e1ff;*/
-/*	border: solid 3px #cecece;*/
-/*	padding: 0px;*/
-/*	width: 60px;*/
-/*	height: 50px;*/
-/*}*/
-/*th.secondth7{*/
-/*	background-color: #e1e1ff;*/
-/*	border: solid 3px #cecece;*/
-/*	padding: 0px;*/
-/*	width: 60px;*/
-/*	height: 50px;*/
-/*}*/
-/*th.secondth8{*/
-/*	background-color: #e1e1ff;*/
-/*	border: solid 3px #cecece;*/
-/*	padding: 0px;*/
-/*	width: 60px;*/
-/*	height: 50px;*/
-/*}*/
-/*th.secondth9{*/
-/*	background-color: #e1e1ff;*/
-/*	border: solid 3px #cecece;*/
-/*	padding: 0px;*/
-/*	width: 60px;*/
-/*	height: 50px;*/
-/*}*/
-/*th.secondth10{*/
-/*	background-color: #e1e1ff;*/
-/*	border: solid 3px #cecece;*/
-/*	padding: 0px;*/
-/*	width: 60px;*/
-/*	height: 50px;*/
-/*}*/
-
 .box.inner{
 	display: flex;
 }
@@ -231,6 +142,7 @@ td.second2{
 }
 
 #pagination{
+	position: relative;
     font-weight: bold;
     color: #FFFFFF;
     background-color: #2C7CFF;
@@ -250,6 +162,48 @@ td.second2{
     text-align: center;
 }
 
+.pagination{
+/*	display: grid;*/
+	grid-template-rows: 45px 1fr;
+}
+
+#first{
+	grid-column: 5/6;
+	width: 45px;
+}
+
+#prev{
+	grid-column: 6/7;
+	width: 45px;
+}
+
+#pageCount{
+	grid-column: 7/8;
+	width: 45px;
+	margin: 0px 15px 0px 15px;
+}
+
+#next{
+	grid-column: 8/9;
+	width: 45px;
+}
+#last{
+	grid-column: 9/10;
+	width: 45px;
+}
+
+#allCount{
+	grid-column: 12/13;
+	width: 95px;
+	margin-left: 30px;
+}
+
+#blankCol{
+	grid-column: 29/30;
+	width: 200px;
+	height: 45px;
+}
+
 .box{
 	overflow-x: scroll;
 	margin-bottom: 25px;
@@ -257,13 +211,24 @@ td.second2{
 	width: 1170px;
 }
 
+#secondTable{
+	border: solid 2px #cecece;
+}
+
 #subTable{
 	overflow-x: scroll;
+	border-collapse: collapse;
 	margin-bottom: 25px;
 	margin-left: 25px;
 	width: 1300px;
 }
+#subTable #innertd:nth-child(odd) td{
+	background-color: rgb(202, 237, 251);
+}
 
+#innerth{
+	background-color: #e1e1ff;
+}
 
 
 /*.flex-row1{
