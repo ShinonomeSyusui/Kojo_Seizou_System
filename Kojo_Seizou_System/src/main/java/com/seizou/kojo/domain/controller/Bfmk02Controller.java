@@ -45,9 +45,9 @@ public class Bfmk02Controller {
 	public String init(CommonDto commonDto, @ModelAttribute SearchForm form, Model model) {
 
 		//メニュー画面の実装がないので仮に設定
-		//commonDto = new CommonDto("bfmk02", "ユーザーの情報一覧", "bfkt02", null, "bfm1", "us1", "総務部", "uskr000", "boss");  //権限区分:3(管理者)
-		//commonDto = new CommonDto("bfmk02", "ユーザーの情報一覧", "bfkt02", null, "bfm1", "it1", "IT部", "itns004", "春夏 秋冬"); //権限区分:2(一般)
-		commonDto = new CommonDto("bfmk02", "ユーザーの情報一覧", "bfkt02", null, "bfm1", "all", "*****", "al00000", "admin"); //権限区分:4(アドミン)
+		//commonDto = new CommonDto("bfmk02", "ユーザーの情報一覧", "bfkt02", null, "bfm1", "us1", "総務部", "uskr000", "boss");      //権限区分:3(管理者)
+		//commonDto = new CommonDto("bfmk02", "ユーザーの情報一覧", "bfkt02", null, "bfm1", "it1", "IT部", "itns004", "春夏 秋冬");   //権限区分:2(一般)
+		commonDto = new CommonDto("bfmk02", "ユーザーの情報一覧", "bfkt02", null, "bfm1", "all", "*****", "al00000", "admin");      //権限区分:4(アドミン)
 
 		//権限区分検索
 		String authDiv = service.checkAuth(commonDto);
@@ -55,19 +55,22 @@ public class Bfmk02Controller {
 
 		//権限チェック
 		if ("1".equals(authDiv) || "2".equals(authDiv)) {
+		  
 			// 権限区分がゲスト、一般の場合
 			model.addAttribute("msinfo001", source.getMessage("msinfo001", null, Locale.JAPAN));
 
-			//入力項目とボタンを非活性にする
-			model.addAttribute("disabled", true);
-		} else if ("3".equals(authDiv)) {
-			// 権限区分が管理者の場合、自動で所属IDに値を設定する
+			//ボタンを非活性にする
+			model.addAttribute("btnDisabled", true);
+			model.addAttribute("affIdReadonly",true);
+			model.addAttribute("userReadonly",true);
 
-			// 戻り値をModelに格納する
-			form.setAffilicateId(authDiv);
+		} else if ("3".equals(authDiv)) {
+
+			// 権限区分が管理者の場合、自動で所属IDに値を設定する
+			form.setAffilicateId(commonDto.getAffId());
 
 			//所属IDの入力項目を非活性にする
-			form.setAffilicateId(commonDto.getAffId());
+			model.addAttribute("affIdReadonly",true);
 		}
 
 		//今日の日付けをフォームへセット

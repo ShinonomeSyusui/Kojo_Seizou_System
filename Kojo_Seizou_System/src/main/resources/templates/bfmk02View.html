@@ -13,19 +13,19 @@
 					<tr id="row1">
 						<td class="ColLeft" th:text="#{affilicateId}"></td>
 						<td class="ColRight">
-							<input class="upperinput" type="text" name="affilicateId" th:field="*{affilicateId}" th:readonly="*{affilicateId}"/>
+							<input class="upperinput" type="text" name="affilicateId" th:field="*{affilicateId}" th:readonly="${affIdReadonly}"/>
 						</td>
 					</tr>
 					<tr id="row2">
 						<td class="ColLeft" th:text="#{userId}"></td>
 						<td class="ColRight">
-							<input class="upperinput" type="text" name="userId" th:field="*{userId}"/>
+							<input class="upperinput" type="text" name="userId" th:field="*{userId}" th:readonly="${userReadonly}"/>
 						</td>
 					</tr>
 					<tr id="row3">
 						<td class="ColLeft" th:text="#{userName}"></td>
 						<td class="ColRight">
-							<input class="upperinput" type="text" th:field="*{userName}"/>
+							<input class="upperinput" type="text" th:field="*{userName}" th:readonly="${userReadonly}"/>
 						</td>
 					</tr>
 					<tr id="row4">
@@ -56,9 +56,9 @@
 								</div>
 								<div class="searchAndClear">
 									<button class="search" type="submit" name="offset" value="0"  
-										formaction="/b-forme_Kojo/pc/202" th:text="#{search}" th:disabled="${disabled}"></button>
+										formaction="/b-forme_Kojo/pc/202" th:text="#{search}" th:disabled="${btnDisabled}"></button>
 									<button class="clear" type="submit" name="clear" 
-										formaction="/b-forme_Kojo/pc/202" th:text="#{clear}" th:disabled="${disabled}"></button>
+										formaction="/b-forme_Kojo/pc/202" th:text="#{clear}" th:disabled="${btnDisabled}"></button>
 								</div>	
 							</div>
 							<div th:if="${users}">
@@ -72,7 +72,6 @@
 									<span id=pageCount class="count" th:text="${currentPage} + ' / ' + ${totalPages}">/</span>
 									<button name="offset" id="next" type="submit" th:value="${next}" formaction="/b-forme_Kojo/pc/202" th:unless="${lastPage}">&nbsp;&gt;&nbsp; </button>
 									<button name="offset" id="last" type="submit" th:value="${last}" formaction="/b-forme_Kojo/pc/202" th:unless="${lastPage}">&nbsp;&gt;&gt;&nbsp; </button>
-									<span id="blankCol">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 									<span id="allCount">総数<span th:text="${count}"></span>件</span>
 								</ul>
 							</div>

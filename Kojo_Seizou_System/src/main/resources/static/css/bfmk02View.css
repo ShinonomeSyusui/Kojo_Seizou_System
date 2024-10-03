@@ -13,6 +13,7 @@ body{
 	background-color: #ffffff;
 }
 #mainTable{
+	display: block;
 	background-color: #FFF0E6;
 	border: solid 1px #ff5050;
 	height: auto;
@@ -20,6 +21,7 @@ body{
 	max-height: 800px;
 }
 #row1,#row2,#row3,#row4,#row5,#row6{
+	max-width: 1195px;
 	background-color: #FFF0E6;
 	border: solid 1px #ff5050;
 	height: auto;
@@ -44,7 +46,7 @@ body{
 	background-color: #FFFAEB;
 	border:  solid 1px #ff5050;
 	font-size: 30px;
-	width: 970px;
+	width: 960px;
 	height: 50px;
 }
 .upperinput{
@@ -61,11 +63,11 @@ label{
 	font-size: 20px;
 	margin-left: 10px;
 }
-button{
-	font-size: 15px;
-	width: 95px;
-	height: 45px;
-}
+/*button{*/
+/*	font-size: 15px;*/
+/*	width: 95px;*/
+/*	height: 45px;*/
+/*}*/
 .messageColunm{
 	width: 500px;
 	margin-left: 300px;
@@ -119,6 +121,15 @@ button{
 
 .clear{
 	margin-right: 15px;
+	font-size: 15px;
+	width: 95px;
+	height: 45px;
+}
+
+.search{
+	font-size: 15px;
+	width: 95px;
+	height: 45px;
 }
 
 .box.inner{
@@ -164,31 +175,33 @@ td.second2{
 
 .pagination{
 	display: grid;
-	grid-template-rows: 45px 1fr;
+/*	grid-template-rows: 45px;*/
+	grid-template-columns:repeat(19, 1fr);
 }
 
 #first{
-	grid-column: 5/6;
+	grid-column: 7/8;
 	width: 45px;
 }
 
 #prev{
-	grid-column: 6/7;
+	grid-column: 8/9;
 	width: 45px;
 }
 
 #pageCount{
-	grid-column: 7/8;
+	grid-column: 9/10;
+	vertical-align: bottom;
 	width: 45px;
 	margin: 0px 15px 0px 15px;
 }
 
 #next{
-	grid-column: 8/9;
+	grid-column: 10/11;
 	width: 45px;
 }
 #last{
-	grid-column: 9/10;
+	grid-column: 11/12;
 	width: 45px;
 }
 
@@ -198,28 +211,25 @@ td.second2{
 	margin-left: 30px;
 }
 
-#blankCol{
-	grid-column: 29/30;
-	width: 200px;
-	height: 45px;
-}
-
 .box{
+	display: block;
 	overflow-x: scroll;
 	margin-bottom: 25px;
 	margin-left: 25px;
-	width: 1170px;
+	width: 1165px;
 }
 
 #secondTable{
 	border: solid 2px #cecece;
+	width: auto;
 }
 
 #subTable{
 	overflow-x: scroll;
 	border-collapse: collapse;
-	margin-bottom: 25px;
-	margin-left: 25px;
+/*	table-layout: fixed;*/
+/*	margin-bottom: 25px;*/
+/*	margin-left: 25px;*/
 	width: 1300px;
 }
 #subTable #innertd:nth-child(odd) td{
@@ -228,6 +238,7 @@ td.second2{
 
 #innerth{
 	background-color: #e1e1ff;
+	max-width: 1161px;
 }
 
 
@@ -263,36 +274,42 @@ td.second2{
 	align-items: center;
 }*/
 #col1,#colhead1{
-	width: 50px;
+/*	width: 50px;*/
 	text-align: center;
 }
 #col2,#colhead2{
-	width: 80px;
+/*	width: 80px;*/
+	width: 82px;
 	text-align: center;
 }
 #col3,#colhead3{
-	width: 170px;
+/*	max-width: 114px;*/
+/*	min-width: 114px;*/
+	width: 146px;
 	text-align: center;
 }
 #col4,#col6,#col7,#col8,#colhead4
 ,#colhead6,#colhead7,#colhead8{
-	width: 120px;
+/*	width: 120px;*/
+	width: 131px;
 	text-align: center;
 }
 #col5,#colhead5{
-	width: 190px;
+/*	max-width: 154px;*/
+/*	min-width: 154px;*/
+	width: 109px;
 	text-align: center;
 }
 #col9,#colhead9{
-	width: 200px;
+/*	width: 200px;*/
 	text-align: center;
 }
 #col10,#colhead10{
-	width: 200px;
+/*	width: 200px;*/
 	text-align: center;
 }
 #col11,#colhead11{
-	width: 160px;
+/*	width: 160px;*/
 	text-align: center;
 }
 #colhead1{
