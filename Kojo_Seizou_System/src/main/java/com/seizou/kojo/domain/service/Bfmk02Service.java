@@ -87,23 +87,6 @@ public class Bfmk02Service {
 	}
 
 	/**
-	 * クリア
-	 * @param form
-	 * @return
-	 */
-	public SearchForm clearForm(SearchForm form) {
-		
-		// 各項目の初期化
-		form.setAffilicateId("");
-		form.setUserId("");
-		form.setUserName("");
-		form.setAuthDiv(null);
-		form.setExpireDateFrom("");
-		form.setExpireDateTo("");
-		return form;
-	}
-
-	/**
 	 * 削除
 	 * @param commonDtoo
 	 * @param id

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -117,45 +118,46 @@ public class Bfmk02Controller {
 		//検索処理
 		List<UserInfoDto> userList = service.getAllUserInfo(form, pageDto);
 
-		
-		
 		//検索結果が該当なしの表示処理
 		if (userList.isEmpty()) {
-			model.addAttribute("msinfo008",
-					source.getMessage("msinfo008", null, Locale.JAPAN));
+			model.addAttribute("msinfo008",source.getMessage("msinfo008", null, Locale.JAPAN));
 			return init(null, form, model);
 		}
 		
 		model.addAttribute("users", userList);
 
-		System.out.println(userList);
+		System.out.println(pageDto.getOffset());
 		return "bfmk02View";
 	}
 
-	/**
-     * 削除
-     * @param form
-     * @param model
-     * @return
-     */
-    @PostMapping(path = "/pc/202", params = "delete")
-    public String delete(CommonDto commonDto,
-            @RequestParam(value = "userIds", required = false) List<String> id,
-            @ModelAttribute SearchForm form, Model model) {
+   /**
+    * 削除
+    * @param id
+    * @param form
+    * @param pageDto
+    * @param model
+    * @return bfmk02View
+    */
+    @PostMapping(path = "/pc/202/{offset}", params = "delete")
+    public String delete(
+        @RequestParam(value = "sendUserId", required = false) List<String> id,
+        @PathVariable int offset,
+        @ModelAttribute SearchForm form, PaginationDto pageDto, Model model) {
 
-        // 削除対象未選択時
-        if (id == null) {
-            model.addAttribute("msinfo005", source.getMessage("msinfo005", null, Locale.JAPAN));
-            clear(commonDto, form, model);
-            System.out.println(model);
-            return "bfmk02View";
-        }
-
-        //削除処理
-        service.deleteUser(id);
-        clear(commonDto, form, model);
-        model.addAttribute("msinfo007", source.getMessage("msinfo007", null, Locale.JAPAN));
+      // 削除対象未選択時
+      if (id == null) {
+        model.addAttribute("msinfo005", source.getMessage("msinfo005", null, Locale.JAPAN));
+        pageDto.setOffset(offset);
+        search(form, pageDto, model);
         return "bfmk02View";
+      }
+
+      // 削除処理
+      service.deleteUser(id);
+      pageDto.setOffset(offset);
+      search(form, pageDto, model);
+      model.addAttribute("msinfo007", source.getMessage("msinfo007", null, Locale.JAPAN));
+      return "bfmk02View";
     }
 
 	/**
@@ -167,7 +169,7 @@ public class Bfmk02Controller {
 	 */
 	@PostMapping(path = "/pc/202", params = "clear")
 	public String clear(CommonDto dto, @ModelAttribute SearchForm form, Model model) {
-		service.clearForm(form);
+		clearForm(form);
 		init(dto, form, model);
 		return "bfmk02View";
 	}
@@ -197,12 +199,7 @@ public class Bfmk02Controller {
 		//全レコード数
 		int count = service.countAll(form);
 
-		//総ページ数
-		int totalPages = count / LIMIT;
-		if (totalPages % LIMIT != 0 ||
-				totalPages == 0) {
-			++totalPages;
-		}
+		
 
 		//現在ページ
 		int offset = pageDto.getOffset();
@@ -217,19 +214,31 @@ public class Bfmk02Controller {
 		//前のoffset値
 		int prevNum = offset - LIMIT;
 
-		//最終ページのoffset値
-		int last = (totalPages - 1) * LIMIT;
+		
 
 		//最初のページと戻るボタンの非表示処理
 		if (currentPage <= 1) {
 			model.addAttribute("firstPage",true);
 		}
 
+		//件数制限処理
+		final int maxCount = 10;
+		if (count > maxCount) {
+		  model.addAttribute("msinfo006", source.getMessage("msinfo006", null, Locale.JAPAN));
+		  count = maxCount;
+		}
+		
+		//総ページ数
+		int totalPages = (int)Math.ceil((double) count / LIMIT);
+
+		//最終ページのoffset値
+		int last = (totalPages - 1) * LIMIT;
+
 		//最後のページと進むボタンの非表示処理
 		if (currentPage == totalPages) {
-			model.addAttribute("lastPage", true);
+		    model.addAttribute("lastPage", true);
 		}
-
+		
 		model.addAttribute("count", count);					//総レコード数
 		model.addAttribute("totalPages", totalPages);		//全ページ数
 		model.addAttribute("currentPage", currentPage);		//現在ページ
@@ -237,5 +246,21 @@ public class Bfmk02Controller {
 		model.addAttribute("prev", prevNum);				//前のページのoffset値
 		model.addAttribute("next", nextNum);				//次のページのoffset値
 		model.addAttribute("last", last);					//最後のページのoffset値
+		model.addAttribute("offset",offset);
+	}
+	
+	/**
+	 * Form初期化
+	 * @param form
+	 */
+	private void clearForm(SearchForm form) {
+	
+	  // 各項目の初期化
+      form.setAffilicateId("");
+      form.setUserId("");
+      form.setUserName("");
+      form.setAuthDiv(null);
+      form.setExpireDateFrom("");
+      form.setExpireDateTo("");
 	}
 }
