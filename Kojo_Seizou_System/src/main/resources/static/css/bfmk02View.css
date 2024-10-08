@@ -16,17 +16,23 @@ body{
 	display: block;
 	background-color: #FFF0E6;
 	border: solid 1px #ff5050;
-	height: auto;
-	max-width: 1200px;
-	max-height: 800px;
+/*	height: auto;*/
+	width: 1200px;
+	height: 800px;
 }
-#row1,#row2,#row3,#row4,#row5,#row6{
+#row1,#row2,#row3,#row4,#row5{
 	max-width: 1195px;
 	background-color: #FFF0E6;
 	border: solid 1px #ff5050;
 	height: auto;
-	
 }
+#row6{
+	max-width: 1195px;
+	background-color: #FFF0E6;
+	border: solid 1px #ff5050;
+	height: 503px;
+}
+
 /*tr.minitable{
 	height: 500px;
 }
@@ -233,14 +239,22 @@ td.second2{
 /*	margin-bottom: 25px;*/
 /*	margin-left: 25px;*/
 	width: 1300px;
+	height: auto;
+	max-height: 294px;
 }
 #subTable #innertd:nth-child(odd) td{
 	background-color: rgb(202, 237, 251);
+	height: 49px;
 }
 
 #innerth{
 	background-color: #e1e1ff;
 	max-width: 1161px;
+	height: 50px;
+}
+
+#innertd{
+	height: 49px;
 }
 
 

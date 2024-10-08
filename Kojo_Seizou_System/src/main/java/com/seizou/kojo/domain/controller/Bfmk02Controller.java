@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import com.seizou.kojo.domain.dto.CommonDto;
 import com.seizou.kojo.domain.dto.PaginationDto;
 import com.seizou.kojo.domain.dto.UserInfoDto;
@@ -43,7 +45,7 @@ public class Bfmk02Controller {
 	 * @return bfmk02View
 	 */
 	@GetMapping("/pc/202")
-	public String init(CommonDto commonDto, @ModelAttribute SearchForm form, Model model) {
+	public String init(CommonDto commonDto, @ModelAttribute SearchForm form, Model model, UserInfoDto dto) {
 
 		//メニュー画面の実装がないので仮に設定
 		//commonDto = new CommonDto("bfmk02", "ユーザーの情報一覧", "bfkt02", null, "bfm1", "us1", "総務部", "uskr000", "boss");      //権限区分:3(管理者)
@@ -79,9 +81,14 @@ public class Bfmk02Controller {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date today = new Date();
 		kyou = format.format(today);
+		
+		//DBから取得した最も古い日付け
+		Date oldDays = service.old_date(dto);
+		String oldDay = format.format(oldDays);
 
-		//Formに今日の日付けをセット
-		form.setExpireDateFrom(kyou);
+		//Formに今日の日付けと最も古い日付けをセット
+		form.setExpireDateTo(kyou);
+		form.setExpireDateFrom(oldDay);
 
 		return "bfmk02View";
 	}
@@ -97,7 +104,7 @@ public class Bfmk02Controller {
 	public String search(@ModelAttribute SearchForm form, PaginationDto pageDto, Model model) {
 
 		//日付け入力値のチェックと検索処理
-		if (service.dateFormat(form.getExpireDateFrom()) && service.dateFormat(form.getExpireDateTo())) {
+		if (!(service.dateFormat(form.getExpireDateFrom()) && service.dateFormat(form.getExpireDateTo()))){
 
 			//不正な入力値の処理
 			model.addAttribute("msinfo002", source.getMessage("msinfo002", null, Locale.JAPAN));
@@ -105,7 +112,8 @@ public class Bfmk02Controller {
 		}
 
 		//未来日チェック
-		if (service.miraibicheck(form.getExpireDateFrom()) || service.miraibicheck(form.getExpireDateTo())) {
+		String fromDay = form.getExpireDateFrom();
+		if (service.miraibicheck(form.getExpireDateFrom()) && fromDay.isBlank()) {
 
 			//未来日エラーの処理
 			model.addAttribute("msinfo004", source.getMessage("msinfo004", null, Locale.JAPAN));
@@ -121,7 +129,7 @@ public class Bfmk02Controller {
 		//検索結果が該当なしの表示処理
 		if (userList.isEmpty()) {
 			model.addAttribute("msinfo008",source.getMessage("msinfo008", null, Locale.JAPAN));
-			return init(null, form, model);
+			return init(null, form, model, null);
 		}
 		
 		model.addAttribute("users", userList);
@@ -170,7 +178,7 @@ public class Bfmk02Controller {
 	@PostMapping(path = "/pc/202", params = "clear")
 	public String clear(CommonDto dto, @ModelAttribute SearchForm form, Model model) {
 		clearForm(form);
-		init(dto, form, model);
+		init(dto, form, model, null);
 		return "bfmk02View";
 	}
 
@@ -222,7 +230,7 @@ public class Bfmk02Controller {
 		}
 
 		//件数制限処理
-		final int maxCount = 10;
+		final int maxCount = 50;
 		if (count > maxCount) {
 		  model.addAttribute("msinfo006", source.getMessage("msinfo006", null, Locale.JAPAN));
 		  count = maxCount;
@@ -246,7 +254,7 @@ public class Bfmk02Controller {
 		model.addAttribute("prev", prevNum);				//前のページのoffset値
 		model.addAttribute("next", nextNum);				//次のページのoffset値
 		model.addAttribute("last", last);					//最後のページのoffset値
-		model.addAttribute("offset",offset);
+		model.addAttribute("offset",offset);				//offset値
 	}
 	
 	/**

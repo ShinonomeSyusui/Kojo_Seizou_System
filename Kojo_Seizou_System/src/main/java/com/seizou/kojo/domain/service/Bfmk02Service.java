@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.seizou.kojo.domain.dto.CommonDto;
 import com.seizou.kojo.domain.dto.PaginationDto;
 import com.seizou.kojo.domain.dto.UserInfoDto;
@@ -106,27 +108,21 @@ public class Bfmk02Service {
 	}
 
 	/**
-	 * 入力チェック、日付け型変換
+	 *日付け型変換
 	 * @param form
 	 * @return 日付け形式と空文字の時にtrue
 	 */
 	public boolean dateFormat(String date) {
-		
-		// 空文字チェック
-		if (date.isBlank() || date.isEmpty()) {
-			return false;
-		}
-		
+
 		//受け取り側のフォーマット指定
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 		// 有効日の表示型をフォーマット
 		try {
-			Date d = format.parse(date);
+			Date d = sdf.parse(date);
 			System.out.println(d);
 		} catch (ParseException e) {
 			e.printStackTrace();
-			return false;
 		}
 		return true;
 	}
@@ -145,10 +141,37 @@ public class Bfmk02Service {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			Date inputDay = format.parse(date);
-			return inputDay.after(today);
+			inputDay.after(today);
 		} catch (ParseException e) {
 			e.printStackTrace();
 			return false;
 		}
+		return true;
+	}
+	
+	/**
+	 * 最も古い日付けを取得する処理
+	 * @param dto
+	 * @return oldest_date
+	 */
+	public Date old_date(UserInfoDto dto) {
+
+		//戻り値の宣言
+		Date oldest_date = new Date(Long.MAX_VALUE);
+
+		// DBから取得した日付リスト
+		List<Map<String, Object>> days = repository.initial_enabled_date(dto);
+
+		// 各レコードの日付をチェック
+		for (Map<String, Object> day : days) {
+			Date expire_date_from = (Date) day.get("expire_date_from");
+
+			// 古い日付と比較して、より古ければ更新
+	        if (expire_date_from != null && expire_date_from.before(oldest_date)) {
+	            oldest_date = expire_date_from;
+	        }
+		}
+		
+		return oldest_date;
 	}
 }

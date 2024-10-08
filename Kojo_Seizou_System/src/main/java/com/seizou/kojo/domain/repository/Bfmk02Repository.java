@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
+
 import com.seizou.kojo.domain.dto.CommonDto;
 import com.seizou.kojo.domain.dto.PaginationDto;
+import com.seizou.kojo.domain.dto.UserInfoDto;
 import com.seizou.kojo.domain.form.SearchForm;
 
 
@@ -197,5 +200,25 @@ public class Bfmk02Repository {
 
 		int countAll = namedJdbc.queryForObject(sql, joken, Integer.class);
 		return countAll;
+	}
+	
+	/**
+	 * 全てのFrom日を取得する処理
+	 * @param infoDto
+	 * @return days
+	 */
+	public List<Map<String, Object>> initial_enabled_date(UserInfoDto infoDto){
+		
+		//戻り値の宣言
+		List<Map<String, Object>> days = new ArrayList<Map<String, Object>>();
+
+		String sql = "SELECT "
+				+ "expire_date_from "
+				+ "FROM "
+				+ "user_info";
+		
+		days = jdbcTemplate.queryForList(sql);
+		
+		return days;
 	}
 }
