@@ -19,7 +19,6 @@ import com.seizou.kojo.domain.form.SearchForm;
 @Repository
 public class Bfmk02Repository {
 
-	
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 

@@ -19,6 +19,7 @@ import com.seizou.kojo.domain.repository.Bfmk02Repository;
 @Service
 public class Bfmk02Service {
 
+	/** リポジトリ */
 	@Autowired
 	Bfmk02Repository repository;
 
@@ -36,6 +37,7 @@ public class Bfmk02Service {
 	/**
 	 * 検索
 	 * @param form
+	 * @param pageDto
 	 * @return returnDtoList
 	 */
 	public List<UserInfoDto> getAllUserInfo(SearchForm form,PaginationDto pageDto){
@@ -110,7 +112,7 @@ public class Bfmk02Service {
 	/**
 	 *日付け型変換
 	 * @param form
-	 * @return 日付け形式と空文字の時にtrue
+	 * @return 日付け形変換true
 	 */
 	public boolean dateFormat(String date) {
 
@@ -130,23 +132,29 @@ public class Bfmk02Service {
 	/**
 	 * 未来日チェック
 	 * @param date
-	 * @return 
+	 * @return 未来日なら true、それ以外は false
 	 */
-	public boolean miraibicheck(String date) {
-
-		//今日の日付けを取得
-		Date today = new Date();
+	public boolean miraibicheck(String fromDay, String toDay) {
 		
-		//受け取り値のフォーマット
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		//フォーマットの型指定
+		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+		fmt.setLenient(false);  //厳密な日付けフォーマットチェックをするために設定
+		
 		try {
-			Date inputDay = format.parse(date);
-			inputDay.after(today);
+			// 受け取った日付けを解析
+			Date inputDayFrom = fmt.parse(fromDay);
+			Date inputDayTo = fmt.parse(toDay);
+
+			// 今日の日付けの比較用（時刻を除いた日付けのみ）
+			Date today = fmt.parse(fmt.format(inputDayTo));
+
+			// 未来日ならばtrueを返す
+			return inputDayFrom.after(today);
+
 		} catch (ParseException e) {
 			e.printStackTrace();
 			return false;
 		}
-		return true;
 	}
 	
 	/**
@@ -171,7 +179,6 @@ public class Bfmk02Service {
 	            oldest_date = expire_date_from;
 	        }
 		}
-		
 		return oldest_date;
 	}
 }

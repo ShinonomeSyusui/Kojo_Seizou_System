@@ -33,7 +33,7 @@ public class Bfmk02Controller {
 	@Autowired
 	Bfmk02Service service;
 
-	//
+	/** メッセージソース */
 	@Autowired
 	MessageSource source;
 
@@ -98,13 +98,13 @@ public class Bfmk02Controller {
 	 * @param form
 	 * @param pageDto
 	 * @param model
-	 * @return
+	 * @return bfmk02View
 	 */
 	@PostMapping(path = "/pc/202", params = "offset")
 	public String search(@ModelAttribute SearchForm form, PaginationDto pageDto, Model model) {
 
 		//日付け入力値のチェックと検索処理
-		if (!(service.dateFormat(form.getExpireDateFrom()) && service.dateFormat(form.getExpireDateTo()))){
+		if (!(service.dateFormat(form.getExpireDateFrom()) && service.dateFormat(form.getExpireDateFrom()))){
 
 			//不正な入力値の処理
 			model.addAttribute("msinfo002", source.getMessage("msinfo002", null, Locale.JAPAN));
@@ -112,8 +112,7 @@ public class Bfmk02Controller {
 		}
 
 		//未来日チェック
-		String fromDay = form.getExpireDateFrom();
-		if (service.miraibicheck(form.getExpireDateFrom()) && fromDay.isBlank()) {
+		if (service.miraibicheck(form.getExpireDateFrom(), form.getExpireDateTo())) {
 
 			//未来日エラーの処理
 			model.addAttribute("msinfo004", source.getMessage("msinfo004", null, Locale.JAPAN));
@@ -207,8 +206,6 @@ public class Bfmk02Controller {
 		//全レコード数
 		int count = service.countAll(form);
 
-		
-
 		//現在ページ
 		int offset = pageDto.getOffset();
 		int currentPage = offset / LIMIT + 1;
@@ -221,8 +218,6 @@ public class Bfmk02Controller {
 
 		//前のoffset値
 		int prevNum = offset - LIMIT;
-
-		
 
 		//最初のページと戻るボタンの非表示処理
 		if (currentPage <= 1) {

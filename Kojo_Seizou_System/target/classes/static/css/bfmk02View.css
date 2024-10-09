@@ -85,7 +85,7 @@ label{
 	background-color: #FFFAEB;
 	vertical-align: baseline;
 	height: 250px;
-	border: solid 1px red;
+	border: solid 1px #ff5050;
 }
 .back{
 	margin-top: 3px;
@@ -222,7 +222,7 @@ td.second2{
 .box{
 	display: block;
 	overflow-x: scroll;
-	margin-bottom: 25px;
+	margin-bottom: 0px;
 	margin-left: 25px;
 	width: 1165px;
 }
