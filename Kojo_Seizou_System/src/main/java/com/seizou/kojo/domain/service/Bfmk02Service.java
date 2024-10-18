@@ -96,7 +96,7 @@ public class Bfmk02Service {
 	 * @param id
 	 * @return
 	 */
-	public String deleteUser(List<String> id) {
+	public void deleteUser(List<String> id) {
 		
 		// 入力チェック
 		if (id != null) {
@@ -106,7 +106,6 @@ public class Bfmk02Service {
 				repository.delete(idNum);
 			}
 		}
-		return "";
 	}
 
 	/**
@@ -162,13 +161,13 @@ public class Bfmk02Service {
 	 * @param dto
 	 * @return oldest_date
 	 */
-	public Date old_date(UserInfoDto dto) {
+	public Date old_date() {
 
 		//戻り値の宣言
 		Date oldest_date = new Date(Long.MAX_VALUE);
 
 		// DBから取得した日付リスト
-		List<Map<String, Object>> days = repository.initial_enabled_date(dto);
+		List<Map<String, Object>> days = repository.initial_enabled_date();
 
 		// 各レコードの日付をチェック
 		for (Map<String, Object> day : days) {

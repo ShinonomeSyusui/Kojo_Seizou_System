@@ -38,7 +38,7 @@ public class Bfmk02Controller {
 	MessageSource source;
 
 	/**
-	 * メニュー画面から遷移して来た時の処理
+	 * 初期画面（メニュー画面から遷移して来た時の処理）
 	 * @param commonDto
 	 * @param form
 	 * @param model
@@ -83,7 +83,7 @@ public class Bfmk02Controller {
 		kyou = format.format(today);
 		
 		//DBから取得した最も古い日付け
-		Date oldDays = service.old_date(dto);
+		Date oldDays = service.old_date();
 		String oldDay = format.format(oldDays);
 
 		//Formに今日の日付けと最も古い日付けをセット

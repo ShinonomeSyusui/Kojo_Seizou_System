@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 
 import com.seizou.kojo.domain.dto.CommonDto;
 import com.seizou.kojo.domain.dto.PaginationDto;
-import com.seizou.kojo.domain.dto.UserInfoDto;
 import com.seizou.kojo.domain.form.SearchForm;
 
 
@@ -203,10 +202,9 @@ public class Bfmk02Repository {
 	
 	/**
 	 * 全てのFrom日を取得する処理
-	 * @param infoDto
 	 * @return days
 	 */
-	public List<Map<String, Object>> initial_enabled_date(UserInfoDto infoDto){
+	public List<Map<String, Object>> initial_enabled_date(){
 		
 		//戻り値の宣言
 		List<Map<String, Object>> days = new ArrayList<Map<String, Object>>();
