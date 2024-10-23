@@ -2,7 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <title th:text="#{pageTitle}"></title>
-<!--<link rel="stylesheet" href="../static/css/bfmk02View.css">-->
 <link rel="stylesheet" th:href="@{/css/bfmk02View.css}">
 </head>
 <body>
@@ -47,7 +46,6 @@
 								<div class="backAndMessages">
 									<a class="back" type="submit" name="back" 
 										href="/b-forme_Kojo/pc/002" th:text="#{return}"></a>
-									<!--<div class="messageColunm" th:text="${errorMeg}" th:if="errorMeg"></div>-->
 									<p class="messageColunm" type="text" readonly th:if="${msinfo001}" th:text="${msinfo001}"></p>
 									<p class="messageColunm" type="text" readonly th:if="${msinfo002}" th:text="${msinfo002}"></p>
 									<p class="messageColunm" type="text" readonly th:if="${msinfo003}" th:text="${msinfo003}"></p>
@@ -110,34 +108,6 @@
 									</tbody>
 								</table>
 							</div>
-							<!--<div class="box" th:if="${users}">
-								<div class="flex-row1">
-									<span class="col1 colhead"></span>
-									<span class="col2 colhead" th:text="#{affilicateId}"></span>
-									<span class="col3 colhead" th:text="#{affilicateName}"></span>
-									<span class="col4 colhead" th:text="#{userId}"></span>
-									<span class="col5 colhead" th:text="#{userName}"></span>
-									<span class="col6 colhead" th:text="#{authDiv}"></span>
-									<span class="col7 colhead" th:text="#{watchAuth}"></span>
-									<span class="col8 colhead" th:text="#{oprAuth}"></span>
-									<span class="col9 colhead" th:text="#{effDateFrom}"></span>
-									<span class="col10 colhead" th:text="#{effDateTo}"></span>
-									<span class="col11 colhead" th:text="#{pass}"></span>
-								</div>
-								<div class="flex-row2" th:each="user:${users}">
-									<span class="col1"><input type="checkbox" name="userId" th:value="${user.userId}" /></span>
-									<span class="col2" th:text="${user.affilicateId}"></span>
-									<span class="col3" th:text="${user.affilicateName}"></span>
-									<span class="col4"><a href="#" th:text="${user.userId}"></a></span>
-									<span class="col5" th:text="${user.userName}"></span>
-									<span class="col6" th:text="${user.authDiv}"></span>
-									<span class="col7" th:text="${user.watchAuthFlg}"></span>
-									<span class="col8" th:text="${user.oprAuthFlg}"></span>
-									<span class="col9" th:text="${user.expireDateFrom}"></span>
-									<span class="col10" th:text="${user.expireDateTo}"></span>
-									<span class="col11" th:text="${user.pass}"></span>
-								</div>
-							</div>-->
 						</td>
 					</tr>
 				</tbody>

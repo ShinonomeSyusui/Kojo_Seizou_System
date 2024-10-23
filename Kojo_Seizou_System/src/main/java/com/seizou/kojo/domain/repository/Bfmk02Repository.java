@@ -88,7 +88,7 @@ public class Bfmk02Repository {
 				+ "WHERE "
 				+ "u.del_flg = '0' ";							//削除フラグ
 
-		List<Object> returnJouken = joukenSql(form);
+		List<Object> returnJouken = createdCriteria(form);
 
 		sql += returnJouken.get(0);
 
@@ -122,7 +122,7 @@ public class Bfmk02Repository {
 	 * @param form
 	 * @return returnObject
 	 */
-	private List<Object> joukenSql(SearchForm form) {
+	private List<Object> createdCriteria(SearchForm form) {
 		
 		String sql = "";
 		
@@ -177,7 +177,7 @@ public class Bfmk02Repository {
 	 * @param joken
 	 * @return
 	 */
-	public int allCountSql(SearchForm form) {
+	public int getTotalCountProcess(SearchForm form) {
 
 		String sql = "SELECT "
 				+ "COUNT(u.affilicate_id) "
@@ -190,7 +190,7 @@ public class Bfmk02Repository {
 				+ "WHERE "
 				+ "u.del_flg = '0' ";							//削除フラグ
 		
-		List<Object> returnJouken = joukenSql(form);
+		List<Object> returnJouken = createdCriteria(form);
 
 		sql += returnJouken.get(0);
 
@@ -204,7 +204,7 @@ public class Bfmk02Repository {
 	 * 全てのFrom日を取得する処理
 	 * @return days
 	 */
-	public List<Map<String, Object>> initial_enabled_date(){
+	public List<Map<String, Object>> getAllFromDateProcess(){
 		
 		//戻り値の宣言
 		List<Map<String, Object>> days = new ArrayList<Map<String, Object>>();

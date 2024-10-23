@@ -45,21 +45,21 @@ public class Bfmk02Controller {
 	 * @return bfmk02View
 	 */
 	@GetMapping("/pc/202")
-	public String init(CommonDto commonDto, @ModelAttribute SearchForm form, Model model, UserInfoDto dto) {
+	public String init(CommonDto commonDto, @ModelAttribute SearchForm form, Model model) {
 
-		//メニュー画面の実装がないので仮に設定
+		//既存のログイン処理の仕様で、ログインユーザーの情報がこの画面に渡されない前提となっているため
+		//コード上でユーザーを切り替えてテストする
 		//commonDto = new CommonDto("bfmk02", "ユーザーの情報一覧", "bfkt02", null, "bfm1", "us1", "総務部", "uskr000", "boss");      //権限区分:3(管理者)
 		//commonDto = new CommonDto("bfmk02", "ユーザーの情報一覧", "bfkt02", null, "bfm1", "it1", "IT部", "itns004", "春夏 秋冬");   //権限区分:2(一般)
 		commonDto = new CommonDto("bfmk02", "ユーザーの情報一覧", "bfkt02", null, "bfm1", "all", "*****", "al00000", "admin");      //権限区分:4(アドミン)
 
 		//権限区分検索
-		String authDiv = service.checkAuth(commonDto);
-		System.out.println(authDiv);
+		String authDiv = service.getAuthority(commonDto);
 
 		//権限チェック
 		if ("1".equals(authDiv) || "2".equals(authDiv)) {
 		  
-			// 権限区分がゲスト、一般の場合
+			// 権限区分がゲスト、一般の場合エラーメッセージをmodelに格納
 			model.addAttribute("msinfo001", source.getMessage("msinfo001", null, Locale.JAPAN));
 
 			//ボタンを非活性にする
@@ -77,17 +77,17 @@ public class Bfmk02Controller {
 		}
 
 		//今日の日付けをフォームへセット
-		String kyou = "";
+		String toDay = "";
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date today = new Date();
-		kyou = format.format(today);
+		toDay = format.format(today);
 		
 		//DBから取得した最も古い日付け
-		Date oldDays = service.old_date();
+		Date oldDays = service.getOldestDate();
 		String oldDay = format.format(oldDays);
 
 		//Formに今日の日付けと最も古い日付けをセット
-		form.setExpireDateTo(kyou);
+		form.setExpireDateTo(toDay);
 		form.setExpireDateFrom(oldDay);
 
 		return "bfmk02View";
@@ -103,18 +103,18 @@ public class Bfmk02Controller {
 	@PostMapping(path = "/pc/202", params = "offset")
 	public String search(@ModelAttribute SearchForm form, PaginationDto pageDto, Model model) {
 
-		//日付け入力値のチェックと検索処理
-		if (!(service.dateFormat(form.getExpireDateFrom()) && service.dateFormat(form.getExpireDateFrom()))){
+		//日付け入力値のチェック
+		if (!(service.isDate(form.getExpireDateFrom()) && service.isDate(form.getExpireDateFrom()))){
 
-			//不正な入力値の処理
+			//不正な入力値の処理、エラーメッセージをmodelに格納し画面表示
 			model.addAttribute("msinfo002", source.getMessage("msinfo002", null, Locale.JAPAN));
 			return "bfmk02View";
 		}
 
 		//未来日チェック
-		if (service.miraibicheck(form.getExpireDateFrom(), form.getExpireDateTo())) {
+		if (service.futureDateCheck(form.getExpireDateFrom(), form.getExpireDateTo())) {
 
-			//未来日エラーの処理
+			//未来日エラーの処理、エラーメッセージをmodelに格納し画面表示
 			model.addAttribute("msinfo004", source.getMessage("msinfo004", null, Locale.JAPAN));
 			return "bfmk02View";
 		}
@@ -128,44 +128,45 @@ public class Bfmk02Controller {
 		//検索結果が該当なしの表示処理
 		if (userList.isEmpty()) {
 			model.addAttribute("msinfo008",source.getMessage("msinfo008", null, Locale.JAPAN));
-			return init(null, form, model, null);
+			return init(null, form, model);
 		}
 		
 		model.addAttribute("users", userList);
 
-		System.out.println(pageDto.getOffset());
 		return "bfmk02View";
 	}
 
-   /**
-    * 削除
-    * @param id
-    * @param form
-    * @param pageDto
-    * @param model
-    * @return bfmk02View
-    */
-    @PostMapping(path = "/pc/202/{offset}", params = "delete")
-    public String delete(
-        @RequestParam(value = "sendUserId", required = false) List<String> id,
-        @PathVariable int offset,
-        @ModelAttribute SearchForm form, PaginationDto pageDto, Model model) {
+	/**
+	 * 削除
+	 * @param id
+	 * @param form
+	 * @param pageDto
+	 * @param model
+	 * @return bfmk02View
+	 */
+	@PostMapping(path = "/pc/202/{offset}", params = "delete")
+	public String delete(
+			@RequestParam(value = "sendUserId", required = false) List<String> id,
+			@PathVariable int offset, @ModelAttribute SearchForm form,
+			PaginationDto pageDto, Model model) {
 
-      // 削除対象未選択時
-      if (id == null) {
-        model.addAttribute("msinfo005", source.getMessage("msinfo005", null, Locale.JAPAN));
-        pageDto.setOffset(offset);
-        search(form, pageDto, model);
-        return "bfmk02View";
-      }
+		// 削除対象未選択時
+		if (id == null) {
+			model.addAttribute("msinfo005",
+					source.getMessage("msinfo005", null, Locale.JAPAN));
+			pageDto.setOffset(offset);
+			search(form, pageDto, model);
+			return "bfmk02View";
+		}
 
-      // 削除処理
-      service.deleteUser(id);
-      pageDto.setOffset(offset);
-      search(form, pageDto, model);
-      model.addAttribute("msinfo007", source.getMessage("msinfo007", null, Locale.JAPAN));
-      return "bfmk02View";
-    }
+		// 削除処理
+		service.deleteUser(id);
+		pageDto.setOffset(offset);
+		search(form, pageDto, model);
+		model.addAttribute("msinfo007",
+				source.getMessage("msinfo007", null, Locale.JAPAN));
+		return "bfmk02View";
+	}
 
 	/**
 	 * クリア
@@ -177,7 +178,7 @@ public class Bfmk02Controller {
 	@PostMapping(path = "/pc/202", params = "clear")
 	public String clear(CommonDto dto, @ModelAttribute SearchForm form, Model model) {
 		clearForm(form);
-		init(dto, form, model, null);
+		init(dto, form, model);
 		return "bfmk02View";
 	}
 
@@ -204,7 +205,7 @@ public class Bfmk02Controller {
 		pageDto.setLimit(LIMIT);
 
 		//全レコード数
-		int count = service.countAll(form);
+		int count = service.getAllCount(form);
 
 		//現在ページ
 		int offset = pageDto.getOffset();
@@ -225,10 +226,10 @@ public class Bfmk02Controller {
 		}
 
 		//件数制限処理
-		final int maxCount = 50;
-		if (count > maxCount) {
+		final int MAX_COUNT = 50;
+		if (count > MAX_COUNT) {
 		  model.addAttribute("msinfo006", source.getMessage("msinfo006", null, Locale.JAPAN));
-		  count = maxCount;
+		  count = MAX_COUNT;
 		}
 		
 		//総ページ数
@@ -254,16 +255,17 @@ public class Bfmk02Controller {
 	
 	/**
 	 * Form初期化
+	 * 
 	 * @param form
 	 */
 	private void clearForm(SearchForm form) {
-	
-	  // 各項目の初期化
-      form.setAffilicateId("");
-      form.setUserId("");
-      form.setUserName("");
-      form.setAuthDiv(null);
-      form.setExpireDateFrom("");
-      form.setExpireDateTo("");
+
+		// 各項目の初期化
+		form.setAffilicateId("");
+		form.setUserId("");
+		form.setUserName("");
+		form.setAuthDiv(null);
+		form.setExpireDateFrom("");
+		form.setExpireDateTo("");
 	}
 }
