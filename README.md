@@ -22,10 +22,14 @@
 
 # 使用技術
 
-* Java 17
-* SpringBoot 2.6.3
-* HTML
-* CSS
-* MySQL 8.0.33
+このプロジェクトでは、以下の技術を使用しています。
+* バックエンド
+  * Java 17
+  * SpringBoot 2.6.3  
+* フロントエンド
+  * HTML
+  * CSS
+* ミドルウェア
+  * MySQL 8.0.33
 
 # 
