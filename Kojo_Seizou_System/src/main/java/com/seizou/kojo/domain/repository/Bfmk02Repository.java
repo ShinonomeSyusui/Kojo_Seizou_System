@@ -177,7 +177,7 @@ public class Bfmk02Repository {
 	 * @param joken
 	 * @return
 	 */
-	public int getTotalCountProcess(SearchForm form) {
+	public int getTotalCount(SearchForm form) {
 
 		String sql = "SELECT "
 				+ "COUNT(u.affilicate_id) "
@@ -204,7 +204,7 @@ public class Bfmk02Repository {
 	 * 全てのFrom日を取得する処理
 	 * @return days
 	 */
-	public List<Map<String, Object>> getAllFromDateProcess(){
+	public List<Map<String, Object>> getAllFromDate(){
 		
 		//戻り値の宣言
 		List<Map<String, Object>> days = new ArrayList<Map<String, Object>>();

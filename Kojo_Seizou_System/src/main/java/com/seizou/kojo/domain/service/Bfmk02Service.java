@@ -36,7 +36,6 @@ public class Bfmk02Service {
 
 	/**
 	 * 検索
-	 * 
 	 * @param form
 	 * @param pageDto
 	 * @return returnDtoList
@@ -89,7 +88,7 @@ public class Bfmk02Service {
 	 * @return allCou
 	 */
 	public int getAllCount(SearchForm form) {
-		int allCou = repository.getTotalCountProcess(form);
+		int allCou = repository.getTotalCount(form);
 
 		return allCou;
 	}
@@ -127,7 +126,7 @@ public class Bfmk02Service {
 
 		// 有効日の表示型をフォーマット
 		try {
-			Date d = sdf.parse(date);
+			sdf.parse(date);
 		} catch (ParseException e) {
 			e.printStackTrace();
 			return false;
@@ -179,7 +178,7 @@ public class Bfmk02Service {
 		Date oldestate = new Date(Long.MAX_VALUE);
 
 		// DBから取得した日付リスト
-		List<Map<String, Object>> days = repository.getAllFromDateProcess();
+		List<Map<String, Object>> days = repository.getAllFromDate();
 
 		// 各レコードの日付をチェック
 		for (Map<String, Object> day : days) {

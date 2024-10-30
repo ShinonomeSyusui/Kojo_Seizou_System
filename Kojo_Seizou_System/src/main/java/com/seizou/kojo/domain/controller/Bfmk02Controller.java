@@ -255,7 +255,6 @@ public class Bfmk02Controller {
 	
 	/**
 	 * Form初期化
-	 * 
 	 * @param form
 	 */
 	private void clearForm(SearchForm form) {

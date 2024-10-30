@@ -1,14 +1,5 @@
 @charset "UTF-8";
 
-テーブルサイズ
-/*#mainTable{
-	background-color: #FFF0E6;
-	border: solid 1px;
-	border-color: #ff5050;
-	height: auto;
-	max-width: 1200px;
-	max-height: 800px;
-}*/
 body{
 	background-color: #ffffff;
 }
@@ -32,14 +23,6 @@ body{
 	border: solid 1px #ff5050;
 	height: 503px;
 }
-
-/*tr.minitable{
-	height: 500px;
-}
-.mainTable, td{
-	background-color: #FFFAEB;
-	border:  solid 1px #ff5050;
-}*/
 .ColLeft{
 	background-color: #FFFAEB;
 	border:  solid 1px #ff5050;
@@ -69,11 +52,6 @@ label{
 	font-size: 20px;
 	margin-left: 10px;
 }
-/*button{*/
-/*	font-size: 15px;*/
-/*	width: 95px;*/
-/*	height: 45px;*/
-/*}*/
 .messageColunm{
 	color: red;
 	font-size: larger;
@@ -93,7 +71,6 @@ label{
 	font-size: 15px;
 	width: 95px;
 	height: 35px;
-	/*padding: 10px 25px;*/
 	padding-top: 12px;
 	border: solid #4f4f4f 1px;
 	border-radius: 3px;
@@ -235,9 +212,6 @@ td.second2{
 #subTable{
 	overflow-x: scroll;
 	border-collapse: collapse;
-/*	table-layout: fixed;*/
-/*	margin-bottom: 25px;*/
-/*	margin-left: 25px;*/
 	width: 1300px;
 	height: auto;
 	max-height: 294px;
@@ -254,41 +228,9 @@ td.second2{
 }
 
 #innertd{
+	background-color: #ffffff;
 	height: 49px;
 }
-
-
-/*.flex-row1{
-	background-color: #e1e1ff ;
-	display: flex;
-	gap: 1px;
-	height: 40px;
-	border: solid 2px #cecece;
-	text-align: center;
-	align-items: center;
-}
-.flex-row2{
-	background-color: #f5f5ff;
-	display: flex;
-	gap: 1px;
-	border-right:solid 2px #cecece ;
-	border-bottom: solid 2px #cecece;
-	border-left: solid 2px #cecece;
-	text-align: center;
-	align-items: center;
-	height: 40px;
-}
-.flex-row3{
-	background-color: #ffffff ;
-	display: flex;
-	gap: 1px;
-	height: 40px;
-	border-right:solid 2px #cecece ;
-	border-bottom: solid 2px #cecece;
-	border-left: solid 2px #cecece;
-	text-align: center;
-	align-items: center;
-}*/
 #col1,#colhead1{
 /*	width: 50px;*/
 	text-align: center;
@@ -299,41 +241,30 @@ td.second2{
 	text-align: center;
 }
 #col3,#colhead3{
-/*	max-width: 114px;*/
-/*	min-width: 114px;*/
 	width: 146px;
 	text-align: center;
 }
 #col4,#col6,#col7,#col8,#colhead4
 ,#colhead6,#colhead7,#colhead8{
-/*	width: 120px;*/
 	width: 131px;
 	text-align: center;
 }
 #col5,#colhead5{
-/*	max-width: 154px;*/
-/*	min-width: 154px;*/
 	width: 109px;
 	text-align: center;
 }
 #col9,#colhead9{
-/*	width: 200px;*/
 	text-align: center;
 }
 #col10,#colhead10{
-/*	width: 200px;*/
 	text-align: center;
 }
 #col11,#colhead11{
-/*	width: 160px;*/
 	text-align: center;
 }
 #colhead1{
 	background-color: #e1e1ff ;
 	border :solid 1px #cecece;
-/*	border-top: solid 2px #cecece;*/
-/*	border-right: solid 2px #cecece;*/
-/*	border: solid 2px #cecece;*/
 }
 #colhead2{
 	background-color: #e1e1ff ;
