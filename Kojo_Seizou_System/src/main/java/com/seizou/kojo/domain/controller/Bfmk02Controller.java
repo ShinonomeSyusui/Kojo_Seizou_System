@@ -87,8 +87,8 @@ public class Bfmk02Controller {
 		String oldDay = format.format(oldDays);
 
 		//Formに今日の日付けと最も古い日付けをセット
-		//form.setExpireDateTo(toDay);
-		//form.setExpireDateFrom(oldDay);
+		form.setExpireDateTo(toDay);
+		form.setExpireDateFrom(oldDay);
 
 		return "bfmk02View";
 	}
