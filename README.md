@@ -47,7 +47,7 @@ cd Kojo_Seizou_System
 mvn install
 ```
 
-# 実際に作成したクラス
+# 実際に作成したソース
 
 * Javaクラス
   * Bfmk02Controller
